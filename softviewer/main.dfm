@@ -13,4 +13,11 @@ object Form5: TForm5
   OldCreateOrder = False
   PixelsPerInch = 120
   TextHeight = 16
+  object Label1: TLabel
+    Left = 32
+    Top = 24
+    Width = 60
+    Height = 16
+    Caption = #1047#1072#1075#1086#1083#1086#1074#1086#1082
+  end
 end
