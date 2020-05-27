@@ -1,13 +1,14 @@
-unit main;
+unit MainFormUnit;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, acMeter, sSkinProvider,
+  sSkinManager, Vcl.WinXCtrls, Vcl.Grids;
 
 type
-  TForm5 = class(TForm)
+  TMainForm = class(TForm)
     Label1: TLabel;
   private
     { Private declarations }
@@ -16,7 +17,7 @@ type
   end;
 
 var
-  Form5: TForm5;
+  MainForm: TMainForm;
 
 implementation
 
