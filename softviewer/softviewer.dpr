@@ -3,9 +3,11 @@ program softviewer;
 uses
   Vcl.Forms,
   MainFormUnit in 'MainFormUnit.pas' {MainForm},
-  SplashFormUnit in 'SplashFormUnit.pas' {SplashScreen};
+  SplashFormUnit in 'SplashFormUnit.pas' {SplashScreen},
+  Style in 'Style.pas';
 
 {$R *.res}
+{$R fontawesome.res}
 
 begin
   Application.Initialize;
