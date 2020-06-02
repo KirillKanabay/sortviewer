@@ -16,7 +16,7 @@ interface
       borderColor: TColor;
 
       //Задает стиль окна
-      procedure setStyle(WindowBorderTop, WindowBorderRight,WindowBorderBottom,WindowBorderLeft: TShape);
+      procedure setStyle(WindowBorderRight,WindowBorderBottom,WindowBorderLeft: TShape);
    {#------------------------------------------#}
   end;
 
@@ -27,7 +27,7 @@ interface
 
 implementation
 
-  procedure TWindowBorderStyle.SetStyle(WindowBorderTop, WindowBorderRight,
+  procedure TWindowBorderStyle.SetStyle(WindowBorderRight,
 WindowBorderBottom,WindowBorderLeft: TShape);
   var WS: TWindowBorderStyle;
   begin
@@ -35,32 +35,26 @@ WindowBorderBottom,WindowBorderLeft: TShape);
     With WS do begin
     {#-----Установка значений стилей окна-----#}
     borderWidth:=5;
-    borderTopWidth:=25;
-
     borderColor:=RGB(11, 118, 179); {hex:0B76B3}
     {#----------------------------------------#}
 
     {Устанавливаем выравнивание}
-    WindowBorderTop.Align := alTop;
     WindowBorderLeft.Align := alLeft;
     WindowBorderRight.Align := alRight;
     WindowBorderBottom.Align := alBottom;
 
     {Устанавливаем размер рамок}
-    WindowBorderTop.Height := borderTopWidth;
     WindowBorderBottom.Height := borderWidth;
 
     WindowBorderLeft.Width := borderWidth;
     WindowBorderRight.Width := borderWidth;
 
     {Устанавливаем цвет рамок}
-    WindowBorderTop.Brush.Color:= borderColor;
     WindowBorderLeft.Brush.Color:= borderColor;
     WindowBorderRight.Brush.Color:= borderColor;
     WindowBorderBottom.Brush.Color:= borderColor;
 
     {Убираем обводку рамок}
-    WindowBorderTop.Pen.Color:=borderColor;
     WindowBorderRight.Pen.Color:=borderColor;
     WindowBorderBottom.Pen.Color:=borderColor;
     WindowBorderLeft.Pen.Color:=borderColor;
@@ -85,4 +79,6 @@ WindowBorderBottom,WindowBorderLeft: TShape);
     RemoveFontResource(PChar(FontFile));
     SendMessage(HWND_BROADCAST,WM_FONTCHANGE,0,0);
   end;
+
+
 end.
