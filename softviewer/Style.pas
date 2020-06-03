@@ -9,6 +9,11 @@ interface
   procedure DestroyFont();
   procedure loadPngFromRes(Image:TImage; id: integer);
 
+const
+  ProductVersion = 'Alpha 0.01';
+  DeveloperName = 'Kirill Kanabay';
+  DeveloperEmail = 'kirillkanabay@gmail.com';
+
 var
   FontArray: array of string = ['GilroyBold','GilroyLight','GilroyRegular','GilroyMedium'];
   WinTempPath: string;
