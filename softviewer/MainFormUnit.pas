@@ -5,18 +5,18 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.WinXCtrls, Vcl.Grids,
-  Vcl.ExtCtrls,Style, Vcl.Buttons, Vcl.WinXPickers, Vcl.Imaging.pngimage;
+  Vcl.ExtCtrls,Style, Vcl.Buttons, Vcl.WinXPickers, Vcl.Imaging.pngimage,
+  Vcl.TitleBarCtrls;
 
 type
   TMainForm = class(TForm)
-    WindowBorderLeft: TShape;
     MainMenu: TPanel;
     MenuTitle: TPanel;
     MenuCaption: TLabel;
     HelpPanel: TPanel;
     HelpCaption: TLabel;
     HelpIcon: TImage;
-    Label1: TLabel;
+    MainFormLabel: TLabel;
     BubbleSortPanel: TPanel;
     ShakeSortPanel: TPanel;
     InsertionSortPanel: TPanel;
@@ -52,7 +52,39 @@ type
     QuickSortIcon: TImage;
     SelectIndQS: TShape;
     SelectAreaQS: TShape;
-    SelectAreaHelp: TShape;
+    SortsListPanel: TPanel;
+    BSitem: TPanel;
+    ScrollBar1: TScrollBar;
+    SortsPanel: TPanel;
+    BSborder: TImage;
+    BSIcon: TImage;
+    BSDescription: TLabel;
+    BSbutton: TPanel;
+    ShakeSort: TPanel;
+    SkSBorder: TImage;
+    SkSIcon: TImage;
+    SkSDescription: TLabel;
+    SkSButton: TPanel;
+    ISItem: TPanel;
+    ISborder: TImage;
+    ISIcon: TImage;
+    ISDescription: TLabel;
+    ISButton: TPanel;
+    SSItem: TPanel;
+    SSBorder: TImage;
+    SSIcon: TImage;
+    SSDescription: TLabel;
+    SSButton: TPanel;
+    ShSItem: TPanel;
+    ShSBorder: TImage;
+    ShSIcon: TImage;
+    ShSDescription: TLabel;
+    ShSButton: TPanel;
+    QSItem: TPanel;
+    QSBorder: TImage;
+    QSIcon: TImage;
+    QSDescription: TLabel;
+    QSButton: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure SelectAreaBSMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -73,9 +105,14 @@ type
     procedure SelectAreaQSMouseLeave(Sender: TObject);
     procedure SelectAreaQSMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
-    procedure SelectAreaHelpMouseMove(Sender: TObject; Shift: TShiftState; X,
+    procedure HelpPanelMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
-    procedure SelectAreaHelpMouseLeave(Sender: TObject);
+    procedure HelpPanelMouseLeave(Sender: TObject);
+    procedure ScrollBar1Change(Sender: TObject);
+    procedure SortsListPanelClick(Sender: TObject);
+    procedure TitleBarPanel1Paint(Sender: TObject; Canvas: TCanvas;
+      var ARect: TRect);
+    procedure HelpPanelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -89,6 +126,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses InfoFormUnit;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 var
@@ -105,10 +144,26 @@ begin
 end;
 
 
+procedure TMainForm.HelpPanelClick(Sender: TObject);
+begin
+  InfoForm.ShowModal();
+end;
+
+procedure TMainForm.TitleBarPanel1Paint(Sender: TObject; Canvas: TCanvas;
+  var ARect: TRect);
+begin
+
+end;
+
 ////////////////////////////////////////////////////////////////////////////////
 //>MainMenu
 ////////////////////////////////////////////////////////////////////////////////
 {#---------------------------------Leave--------------------------------------#}
+procedure TMainForm.ScrollBar1Change(Sender: TObject);
+begin
+    SortsListPanel.Top:=-ScrollBar1.Position;
+end;
+
 procedure TMainForm.SelectAreaBSMouseLeave(Sender: TObject);
 begin
   BubbleSortPanel.Color:=$00C1820C;
@@ -151,7 +206,7 @@ begin
   Screen.Cursor:=crArrow
 end;
 
-procedure TMainForm.SelectAreaHelpMouseLeave(Sender: TObject);
+procedure TMainForm.HelpPanelMouseLeave(Sender: TObject);
 begin
   if (isHoverHI) then begin
     loadPngFromRes(HelpIcon,1);
@@ -170,7 +225,7 @@ begin
   Screen.Cursor:=crHandPoint;
 end;
 
-procedure TMainForm.SelectAreaHelpMouseMove(Sender: TObject; Shift: TShiftState;
+procedure TMainForm.HelpPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
    if not (isHoverHI) then begin
@@ -220,8 +275,11 @@ begin
   SelectIndSkS.Visible:=true;
   Screen.Cursor:=crHandPoint;
 end;
+procedure TMainForm.SortsListPanelClick(Sender: TObject);
+begin
+
+end;
+
 {#----------------------------------------------------------------------------#}
 end.
-////////////////////////////////////////////////////////////////////////////////
-///
-////////////////////////////////////////////////////////////////////////////////
+
