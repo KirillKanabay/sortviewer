@@ -10,51 +10,49 @@ uses
 type
   TMainForm = class(TForm)
     WindowBorderLeft: TShape;
-    WindowBorderBottom: TShape;
-    WindowBorderRight: TShape;
     MainMenu: TPanel;
     MenuTitle: TPanel;
     MenuCaption: TLabel;
     HelpPanel: TPanel;
     HelpCaption: TLabel;
     HelpIcon: TImage;
-    MenuIcon: TImage;
     Label1: TLabel;
     BubbleSortPanel: TPanel;
     ShakeSortPanel: TPanel;
     InsertionSortPanel: TPanel;
     SelectionSortPanel: TPanel;
-    ShellSortPanel: TPanel;
-    QuickSortPanel: TPanel;
     BubbleSortCaption: TLabel;
     ShakeSortCaption: TLabel;
     InsertionSortCaption: TLabel;
-    ShellSortCaption: TLabel;
     SelectionSortCaption: TLabel;
-    QuickSortCaption: TLabel;
     BorderBottomBS: TShape;
     BorderBottomIS: TShape;
     BorderBottomSS: TShape;
     BorderBottomSkS: TShape;
     BubbleSortIcon: TImage;
     InsertionSortIcon: TImage;
-    QuickSortIcon: TImage;
     SelectionSortIcon: TImage;
     ShakeSortIcon: TImage;
-    ShellSortIcon: TImage;
-    BorderBottomShS: TShape;
     SelectIndBS: TShape;
     SelectIndIS: TShape;
     SelectIndSkS: TShape;
-    SelectIndShS: TShape;
     SelectIndSS: TShape;
-    SelectIndQS: TShape;
     SelectAreaBS: TShape;
     SelectAreaIS: TShape;
-    SelectAreaQS: TShape;
     SelectAreaSS: TShape;
     SelectionAreaSkS: TShape;
+    ShellSortPanel: TPanel;
+    ShellSortCaption: TLabel;
+    BorderBottomShS: TShape;
+    ShellSortIcon: TImage;
+    SelectIndShS: TShape;
     SelectAreaShS: TShape;
+    QuickSortPanel: TPanel;
+    QuickSortCaption: TLabel;
+    QuickSortIcon: TImage;
+    SelectIndQS: TShape;
+    SelectAreaQS: TShape;
+    SelectAreaHelp: TShape;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure SelectAreaBSMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -75,6 +73,9 @@ type
     procedure SelectAreaQSMouseLeave(Sender: TObject);
     procedure SelectAreaQSMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
+    procedure SelectAreaHelpMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure SelectAreaHelpMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -83,33 +84,31 @@ type
 
 var
   MainForm: TMainForm;
+  isHoverHI: boolean;
 
 implementation
 
 {$R *.dfm}
 
 procedure TMainForm.FormCreate(Sender: TObject);
-var WBS: TWindowBorderStyle;
-    Res : TResourceStream;
+var
+  Res : TResourceStream;
 begin
-  {Подключаем иконки}
-  LoadFont('AwesomeFont','fontawesome5.otf');
-  {Оформляем окно программы}
-  WBS.SetStyle(WindowBorderRight,WindowBorderBottom,WindowBorderLeft);
+  {Подключаем шрифты}
+  LoadFont();
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
-  DestroyFont('fontawesome5.otf');
+  {уничтожаем шрифты}
+  DestroyFont();
 end;
 
 
-
-
-
 ////////////////////////////////////////////////////////////////////////////////
-//>HOVER EFFECT MainMenu
+//>MainMenu
 ////////////////////////////////////////////////////////////////////////////////
+{#---------------------------------Leave--------------------------------------#}
 procedure TMainForm.SelectAreaBSMouseLeave(Sender: TObject);
 begin
   BubbleSortPanel.Color:=$00C1820C;
@@ -151,7 +150,18 @@ begin
   SelectIndSkS.Visible:=false;
   Screen.Cursor:=crArrow
 end;
-{#--------------------------------Move----------------------------------------#}
+
+procedure TMainForm.SelectAreaHelpMouseLeave(Sender: TObject);
+begin
+  if (isHoverHI) then begin
+    loadPngFromRes(HelpIcon,1);
+    isHoverHI:=false;
+   end;
+  HelpCaption.Font.Color:=$00FFFFFF;
+  Screen.Cursor:=crArrow;
+end;
+{#----------------------------------------------------------------------------#}
+{#---------------------------------Move---------------------------------------#}
 procedure TMainForm.SelectAreaBSMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
@@ -160,6 +170,16 @@ begin
   Screen.Cursor:=crHandPoint;
 end;
 
+procedure TMainForm.SelectAreaHelpMouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: Integer);
+begin
+   if not (isHoverHI) then begin
+    loadPngFromRes(HelpIcon,2);
+    isHoverHI:=true;
+   end;
+   HelpCaption.Font.Color:=$0040E3F0;
+   Screen.Cursor:=crHandPoint;
+end;
 
 procedure TMainForm.SelectAreaISMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
@@ -168,8 +188,6 @@ begin
   SelectIndIS.Visible:=true;
   Screen.Cursor:=crHandPoint;
 end;
-
-
 
 procedure TMainForm.SelectAreaQSMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
@@ -202,5 +220,8 @@ begin
   SelectIndSkS.Visible:=true;
   Screen.Cursor:=crHandPoint;
 end;
-
+{#----------------------------------------------------------------------------#}
 end.
+////////////////////////////////////////////////////////////////////////////////
+///
+////////////////////////////////////////////////////////////////////////////////

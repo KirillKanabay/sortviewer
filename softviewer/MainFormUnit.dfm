@@ -4,7 +4,7 @@ object MainForm: TMainForm
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'MainForm'
-  ClientHeight = 560
+  ClientHeight = 546
   ClientWidth = 900
   Color = clWhite
   Font.Charset = ANSI_CHARSET
@@ -19,24 +19,11 @@ object MainForm: TMainForm
   OnDestroy = FormDestroy
   PixelsPerInch = 120
   TextHeight = 40
-  object WindowBorderRight: TShape
-    Left = 895
-    Top = 0
-    Width = 5
-    Height = 555
-    Align = alRight
-    Brush.Color = 11761163
-    Pen.Color = 11761163
-    Pen.Width = 0
-    ExplicitLeft = 830
-    ExplicitTop = 25
-    ExplicitHeight = 550
-  end
   object WindowBorderLeft: TShape
     Left = 0
     Top = 0
     Width = 5
-    Height = 555
+    Height = 546
     Align = alLeft
     Brush.Color = 11761163
     Pen.Color = 11761163
@@ -44,22 +31,10 @@ object MainForm: TMainForm
     ExplicitTop = 25
     ExplicitHeight = 435
   end
-  object WindowBorderBottom: TShape
-    Left = 0
-    Top = 555
-    Width = 900
-    Height = 5
-    Align = alBottom
-    Brush.Color = 11761163
-    Pen.Color = 11761163
-    ExplicitLeft = 32
-    ExplicitTop = 426
-    ExplicitWidth = 894
-  end
   object Label1: TLabel
     Left = 336
     Top = 13
-    Width = 505
+    Width = 494
     Height = 40
     Caption = #1040#1083#1075#1086#1088#1080#1090#1084#1099' '#1089#1086#1088#1090#1080#1088#1086#1074#1082#1080' '#1076#1072#1085#1085#1099#1093
     Font.Charset = ANSI_CHARSET
@@ -89,70 +64,56 @@ object MainForm: TMainForm
       ParentBackground = False
       TabOrder = 0
       object MenuCaption: TLabel
-        Left = 64
+        AlignWithMargins = True
+        Left = 72
         Top = 21
-        Width = 68
-        Height = 36
-        Caption = #1052#1077#1085#1102
+        Width = 74
+        Height = 30
+        Alignment = taCenter
+        BiDiMode = bdRightToLeftReadingOnly
+        Caption = #1052#1077#1085#1102' '
         Font.Charset = ANSI_CHARSET
         Font.Color = clHighlightText
         Font.Height = 30
         Font.Name = 'Gilroy Bold'
+        Font.Pitch = fpFixed
         Font.Style = []
+        Font.Quality = fqAntialiased
+        ParentBiDiMode = False
         ParentFont = False
-      end
-      object MenuIcon: TImage
-        Left = 183
-        Top = 21
-        Width = 30
-        Height = 30
-        Center = True
-        Picture.Data = {
-          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
-          00200804000000D973B27F0000000467414D410000B18F0BFC61050000000262
-          4B47440000AA8D2332000000097048597300000EC400000EC401952B0E1B0000
-          000774494D4507E406020F1F308497B710000000D64944415478DAB5954D0AC2
-          301085DF5BE95ECF24A23BC5AD9E4D41772A088A5EC97A817613B39052DB649A
-          F8B0106833F3BEE6677EE80E9860CD1BB21F37C30E77BA02639458F29A299FE3
-          88019EF49C937FC9447CE42516F41F539C314485152F89F28682ED893C39C0D0
-          64BABC06A422BA5EB48CFDF22F401F226C658A936561DA7FE2E00E20E46C6D2D
-          00680BEC9309029A223FCCBB89001AD10E3B53A2807A15B083EB7F00710BE221
-          8AD728069218CA623289E92C1614B1A48945552CEB6263915B9B7B612434D782
-          6EEFDBFBE6C7F6BEC5E30DFD2FE7CA0F3712390000002574455874646174653A
-          63726561746500323032302D30362D30325431353A33313A34382B30303A3030
-          574557450000002574455874646174653A6D6F6469667900323032302D30362D
-          30325431353A33313A34382B30303A30302618EFF90000001974455874536F66
-          7477617265007777772E696E6B73636170652E6F72679BEE3C1A000000004945
-          4E44AE426082}
       end
     end
     object HelpPanel: TPanel
       Left = 0
-      Top = 490
+      Top = 480
       Width = 230
-      Height = 70
+      Height = 65
       BevelOuter = bvNone
       Color = 8410376
       ParentBackground = False
       TabOrder = 1
       object HelpCaption: TLabel
-        Left = 43
-        Top = 19
+        Left = 44
+        Top = 18
         Width = 105
         Height = 30
         Caption = #1057#1087#1088#1072#1074#1082#1072
+        Color = 8410376
         Font.Charset = ANSI_CHARSET
         Font.Color = clHighlightText
         Font.Height = 30
         Font.Name = 'Gilroy Bold'
+        Font.Pitch = fpFixed
         Font.Style = []
+        Font.Quality = fqAntialiased
+        ParentColor = False
         ParentFont = False
       end
       object HelpIcon: TImage
-        Left = 179
+        Left = 183
         Top = 15
-        Width = 34
-        Height = 34
+        Width = 35
+        Height = 35
         Center = True
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
@@ -183,6 +144,17 @@ object MainForm: TMainForm
           77617265007777772E696E6B73636170652E6F72679BEE3C1A0000000049454E
           44AE426082}
       end
+      object SelectAreaHelp: TShape
+        Left = 0
+        Top = -5
+        Width = 230
+        Height = 70
+        Brush.Style = bsClear
+        Pen.Style = psClear
+        Pen.Width = 0
+        OnMouseLeave = SelectAreaHelpMouseLeave
+        OnMouseMove = SelectAreaHelpMouseMove
+      end
     end
     object BubbleSortPanel: TPanel
       Left = 1
@@ -196,17 +168,19 @@ object MainForm: TMainForm
       ParentBackground = False
       TabOrder = 2
       object BubbleSortCaption: TLabel
-        Left = 0
+        Left = 25
         Top = 6
-        Width = 148
-        Height = 57
+        Width = 123
+        Height = 46
         Alignment = taRightJustify
         Caption = #1055#1091#1079#1099#1088#1100#1082#1086#1074#1072#1103' '#1089#1086#1088#1090#1080#1088#1086#1074#1082#1072
         Font.Charset = ANSI_CHARSET
         Font.Color = clHighlightText
-        Font.Height = -20
+        Font.Height = 23
         Font.Name = 'Gilroy Bold'
+        Font.Pitch = fpFixed
         Font.Style = []
+        Font.Quality = fqAntialiased
         ParentFont = False
         WordWrap = True
       end
@@ -300,17 +274,19 @@ object MainForm: TMainForm
       ParentCtl3D = False
       TabOrder = 3
       object ShakeSortCaption: TLabel
-        Left = -2
+        Left = 36
         Top = 6
-        Width = 148
-        Height = 57
+        Width = 110
+        Height = 46
         Alignment = taRightJustify
         Caption = #1064#1077#1081#1082#1077#1088#1085#1072#1103' '#1089#1086#1088#1090#1080#1088#1086#1074#1082#1072
         Font.Charset = ANSI_CHARSET
         Font.Color = clHighlightText
-        Font.Height = -20
+        Font.Height = 23
         Font.Name = 'Gilroy Bold'
+        Font.Pitch = fpFixed
         Font.Style = []
+        Font.Quality = fqAntialiased
         ParentFont = False
         WordWrap = True
       end
@@ -373,7 +349,7 @@ object MainForm: TMainForm
       end
       object SelectionAreaSkS: TShape
         Left = 0
-        Top = 0
+        Top = -1
         Width = 230
         Height = 70
         Brush.Style = bsClear
@@ -392,17 +368,19 @@ object MainForm: TMainForm
       ParentBackground = False
       TabOrder = 4
       object InsertionSortCaption: TLabel
-        Left = -1
+        Left = 30
         Top = 6
-        Width = 147
-        Height = 57
+        Width = 116
+        Height = 46
         Alignment = taRightJustify
         Caption = #1057#1086#1088#1090#1080#1088#1086#1074#1082#1072' '#1074#1089#1090#1072#1074#1082#1072#1084#1080
         Font.Charset = ANSI_CHARSET
         Font.Color = clHighlightText
-        Font.Height = -20
+        Font.Height = 23
         Font.Name = 'Gilroy Bold'
+        Font.Pitch = fpFixed
         Font.Style = []
+        Font.Quality = fqAntialiased
         ParentFont = False
         WordWrap = True
       end
@@ -470,168 +448,6 @@ object MainForm: TMainForm
         OnMouseMove = SelectAreaISMouseMove
       end
     end
-    object ShellSortPanel: TPanel
-      Left = 1
-      Top = 346
-      Width = 230
-      Height = 72
-      BevelOuter = bvNone
-      Color = 12681740
-      ParentBackground = False
-      TabOrder = 6
-      object ShellSortCaption: TLabel
-        Left = -1
-        Top = 9
-        Width = 147
-        Height = 57
-        Alignment = taRightJustify
-        Caption = #1057#1086#1088#1090#1080#1088#1086#1074#1082#1072' '#1064#1077#1083#1083#1072
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clHighlightText
-        Font.Height = -20
-        Font.Name = 'Gilroy Bold'
-        Font.Style = []
-        ParentFont = False
-        WordWrap = True
-      end
-      object ShellSortIcon: TImage
-        Left = 182
-        Top = 14
-        Width = 35
-        Height = 35
-        Center = True
-        Picture.Data = {
-          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
-          00200804000000D973B27F0000000467414D410000B18F0BFC61050000000262
-          4B47440000AA8D2332000000097048597300000EC400000EC401952B0E1B0000
-          000774494D4507E4060211362A2B0B5FFB0000010B4944415478DA6364A01030
-          8E1A400503FEA7330800E9B58C773025FFBB321801A9738CBBB1C8A9300403A9
-          0F8CFFBF333430B8306C659C8045D176867B404A89D1138B5C018337C31E8606
-          C6FFEF1905FF37004DC26E402390AAC7618000630350F7401BE04FA9015E8C40
-          333652E60577C69D540A83FFEC0CF50C758C7F8092DA0CD68CB3500DF8CF0694
-          6D60FC0D646932D833CEC030806122C3660643864960E3F919CA188A1827A118
-          B091C18C01E24A3EA06C19C37F6C065830CC811A90CE90CF3819CD005B865950
-          03D2194A300C007BA10EA898B01734181CB0786190A6442B860B0C7A9418E0CA
-          7092416B9067A6F75428502045DA1AC6BB58C3805091F67E1094CAA306300000
-          E1C002826E0BBE7D0000002574455874646174653A6372656174650032303230
-          2D30362D30325431373A35343A34322B30303A30309DF5BC4700000025744558
-          74646174653A6D6F6469667900323032302D30362D30325431373A35343A3432
-          2B30303A3030ECA804FB0000001974455874536F667477617265007777772E69
-          6E6B73636170652E6F72679BEE3C1A0000000049454E44AE426082}
-      end
-      object BorderBottomShS: TShape
-        Left = 0
-        Top = 67
-        Width = 230
-        Height = 5
-        Align = alBottom
-        Brush.Color = 8410376
-        Pen.Color = 11761163
-        Pen.Style = psClear
-        ExplicitLeft = -1
-        ExplicitTop = 55
-      end
-      object SelectIndShS: TShape
-        Left = 225
-        Top = 0
-        Width = 5
-        Height = 67
-        Align = alRight
-        Brush.Color = 4252656
-        Enabled = False
-        Pen.Style = psClear
-        Visible = False
-        ExplicitLeft = 223
-        ExplicitTop = -1
-        ExplicitHeight = 65
-      end
-      object SelectAreaShS: TShape
-        Left = 0
-        Top = 2
-        Width = 230
-        Height = 70
-        Brush.Style = bsClear
-        Pen.Style = psClear
-        OnMouseLeave = SelectAreaShSMouseLeave
-        OnMouseMove = SelectAreaShSMouseMove
-      end
-    end
-    object QuickSortPanel: TPanel
-      Left = 0
-      Top = 421
-      Width = 230
-      Height = 70
-      BevelOuter = bvNone
-      Color = 12681740
-      ParentBackground = False
-      ShowCaption = False
-      TabOrder = 7
-      object QuickSortCaption: TLabel
-        Left = 0
-        Top = 13
-        Width = 148
-        Height = 57
-        Alignment = taRightJustify
-        Caption = #1041#1099#1089#1090#1088#1072#1103' '#1089#1086#1088#1090#1080#1088#1086#1074#1082#1072
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clHighlightText
-        Font.Height = -20
-        Font.Name = 'Gilroy Bold'
-        Font.Style = []
-        ParentFont = False
-        WordWrap = True
-      end
-      object QuickSortIcon: TImage
-        Left = 183
-        Top = 21
-        Width = 35
-        Height = 35
-        Center = True
-        Picture.Data = {
-          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
-          00200804000000D973B27F0000000467414D410000B18F0BFC61050000000262
-          4B47440000AA8D2332000000097048597300000EC400000EC401952B0E1B0000
-          000774494D4507E40602121E0DD11AFA63000001AB4944415478DAED954B2845
-          511486BF753D065E25F24A490913A4CC2EC923614844C2806462626666646A60
-          A2A49072071892090A33454AA194E4D12D19780DDC38D679B8CE807B750C0C58
-          75DA67EDBDFE6FEDB5F6E96CC131A38576BA2544543362986145166C4FC2F200
-          71F4CADC37003DCC12A24396C300473E2EC3D1E556FC1823BCE87E172C8023DF
-          61947B827216459C4F06C91AEBB77721461DAB2AFFB01BF5A764EB136935FD34
-          91E69A0AD12446122B54A973C40599E43801AB0CCAB94B9CC7248D4E826B82E4
-          52ACEF5B349B25D8882B6AE558BD523A1922915B5A65D391D7B2482A0F4C1090
-          03F58B58D754A6FCC16EE23BA2464E2C3F4BFBDCC0130DB2A35E256B24E8D32B
-          416BB5908D77F9C7319A8872AD68DBF16399A6874B9D13F6C956609FBC386B95
-          5AE09E2D0F032C44B1ECBAAA8ED76DFAB5721F039AAD5E9E5D6B151CD97217E0
-          93AE97681EC38A2993C3AFA2220014B1448B0E8BD2F6754C644017F33A744AC0
-          2BA0103D580AE4D42B2011B35549F2E815E0C33CBA1879FD07FC71C08D0EE99E
-          01DFB12800234543EE3C037EDE03D1FF222488F18B3DD02B27F285FBFB1FD21B
-          7214A56E334B0A220000002574455874646174653A6372656174650032303230
-          2D30362D30325431383A33303A31332B30303A3030B54C069B00000025744558
-          74646174653A6D6F6469667900323032302D30362D30325431383A33303A3133
-          2B30303A3030C411BE270000001974455874536F667477617265007777772E69
-          6E6B73636170652E6F72679BEE3C1A0000000049454E44AE426082}
-      end
-      object SelectIndQS: TShape
-        Left = 226
-        Top = 0
-        Width = 6
-        Height = 70
-        Brush.Color = 4252656
-        Enabled = False
-        Pen.Style = psClear
-        Visible = False
-      end
-      object SelectAreaQS: TShape
-        Left = 0
-        Top = 0
-        Width = 230
-        Height = 70
-        Brush.Style = bsClear
-        Pen.Style = psClear
-        OnMouseLeave = SelectAreaQSMouseLeave
-        OnMouseMove = SelectAreaQSMouseMove
-      end
-    end
     object SelectionSortPanel: TPanel
       Left = 1
       Top = 277
@@ -644,17 +460,19 @@ object MainForm: TMainForm
       ShowCaption = False
       TabOrder = 5
       object SelectionSortCaption: TLabel
-        Left = -1
+        Left = 30
         Top = 7
-        Width = 147
-        Height = 57
+        Width = 116
+        Height = 46
         Alignment = taRightJustify
         Caption = #1057#1086#1088#1090#1080#1088#1086#1074#1082#1072' '#1074#1099#1073#1086#1088#1086#1084
         Font.Charset = ANSI_CHARSET
         Font.Color = clHighlightText
-        Font.Height = -20
+        Font.Height = 23
         Font.Name = 'Gilroy Bold'
+        Font.Pitch = fpFixed
         Font.Style = []
+        Font.Quality = fqAntialiased
         ParentFont = False
         WordWrap = True
       end
@@ -729,6 +547,168 @@ object MainForm: TMainForm
         Pen.Style = psClear
         OnMouseLeave = SelectAreaSSMouseLeave
         OnMouseMove = SelectAreaSSMouseMove
+      end
+    end
+    object ShellSortPanel: TPanel
+      Left = 0
+      Top = 346
+      Width = 230
+      Height = 70
+      BevelOuter = bvNone
+      Color = 12681740
+      Ctl3D = False
+      ParentBackground = False
+      ParentCtl3D = False
+      TabOrder = 6
+      object ShellSortCaption: TLabel
+        Left = 30
+        Top = 6
+        Width = 116
+        Height = 46
+        Alignment = taRightJustify
+        Caption = #1057#1086#1088#1090#1080#1088#1086#1074#1082#1072' '#1064#1077#1083#1083#1072
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clHighlightText
+        Font.Height = 23
+        Font.Name = 'Gilroy Bold'
+        Font.Pitch = fpFixed
+        Font.Style = []
+        Font.Quality = fqAntialiased
+        ParentFont = False
+        WordWrap = True
+      end
+      object BorderBottomShS: TShape
+        Left = 0
+        Top = 65
+        Width = 230
+        Height = 5
+        Align = alBottom
+        Brush.Color = 8410376
+        Pen.Color = 11761163
+        Pen.Style = psClear
+        ExplicitTop = 57
+      end
+      object ShellSortIcon: TImage
+        Left = 182
+        Top = 16
+        Width = 35
+        Height = 35
+        Center = True
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
+          00200804000000D973B27F0000000467414D410000B18F0BFC61050000000262
+          4B47440000AA8D2332000000097048597300000EC400000EC401952B0E1B0000
+          000774494D4507E4060211362A2B0B5FFB0000010B4944415478DA6364A01030
+          8E1A400503FEA7330800E9B58C773025FFBB321801A9738CBBB1C8A9300403A9
+          0F8CFFBF333430B8306C659C8045D176867B404A89D1138B5C018337C31E8606
+          C6FFEF1905FF37004DC26E402390AAC7618000630350F7401BE04FA9015E8C40
+          333652E60577C69D540A83FFEC0CF50C758C7F8092DA0CD68CB3500DF8CF0694
+          6D60FC0D646932D833CEC030806122C3660643864960E3F919CA188A1827A118
+          B091C18C01E24A3EA06C19C37F6C065830CC811A90CE90CF3819CD005B865950
+          03D2194A300C007BA10EA898B01734181CB0786190A6442B860B0C7A9418E0CA
+          7092416B9067A6F75428502045DA1AC6BB58C3805091F67E1094CAA306300000
+          E1C002826E0BBE7D0000002574455874646174653A6372656174650032303230
+          2D30362D30325431373A35343A34322B30303A30309DF5BC4700000025744558
+          74646174653A6D6F6469667900323032302D30362D30325431373A35343A3432
+          2B30303A3030ECA804FB0000001974455874536F667477617265007777772E69
+          6E6B73636170652E6F72679BEE3C1A0000000049454E44AE426082}
+      end
+      object SelectIndShS: TShape
+        Left = 226
+        Top = 0
+        Width = 5
+        Height = 65
+        Brush.Color = 4252656
+        Pen.Style = psClear
+        Visible = False
+      end
+      object SelectAreaShS: TShape
+        Left = 0
+        Top = -1
+        Width = 230
+        Height = 70
+        Brush.Style = bsClear
+        Pen.Style = psClear
+        OnMouseLeave = SelectAreaShSMouseLeave
+        OnMouseMove = SelectAreaShSMouseMove
+      end
+    end
+    object QuickSortPanel: TPanel
+      Left = 0
+      Top = 415
+      Width = 230
+      Height = 65
+      BevelOuter = bvNone
+      Color = 12681740
+      Ctl3D = False
+      ParentBackground = False
+      ParentCtl3D = False
+      TabOrder = 7
+      object QuickSortCaption: TLabel
+        Left = 39
+        Top = 6
+        Width = 107
+        Height = 46
+        Alignment = taRightJustify
+        Caption = #1041#1099#1089#1090#1088#1072#1103' '#1089#1086#1088#1090#1080#1088#1086#1074#1082#1072
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clHighlightText
+        Font.Height = 23
+        Font.Name = 'Gilroy Bold'
+        Font.Pitch = fpFixed
+        Font.Style = []
+        Font.Quality = fqAntialiased
+        ParentFont = False
+        WordWrap = True
+      end
+      object QuickSortIcon: TImage
+        Left = 182
+        Top = 16
+        Width = 35
+        Height = 35
+        Center = True
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
+          00200804000000D973B27F0000000467414D410000B18F0BFC61050000000262
+          4B47440000AA8D2332000000097048597300000EC400000EC401952B0E1B0000
+          000774494D4507E40602121E0DD11AFA63000001AB4944415478DAED954B2845
+          511486BF753D065E25F24A490913A4CC2EC923614844C2806462626666646A60
+          A2A49072071892090A33454AA194E4D12D19780DDC38D679B8CE807B750C0C58
+          75DA67EDBDFE6FEDB5F6E96CC131A38576BA2544543362986145166C4FC2F200
+          71F4CADC37003DCC12A24396C300473E2EC3D1E556FC1823BCE87E172C8023DF
+          61947B827216459C4F06C91AEBB77721461DAB2AFFB01BF5A764EB136935FD34
+          91E69A0AD12446122B54A973C40599E43801AB0CCAB94B9CC7248D4E826B82E4
+          52ACEF5B349B25D8882B6AE558BD523A1922915B5A65D391D7B2482A0F4C1090
+          03F58B58D754A6FCC16EE23BA2464E2C3F4BFBDCC0130DB2A35E256B24E8D32B
+          416BB5908D77F9C7319A8872AD68DBF16399A6874B9D13F6C956609FBC386B95
+          5AE09E2D0F032C44B1ECBAAA8ED76DFAB5721F039AAD5E9E5D6B151CD97217E0
+          93AE97681EC38A2993C3AFA2220014B1448B0E8BD2F6754C644017F33A744AC0
+          2BA0103D580AE4D42B2011B35549F2E815E0C33CBA1879FD07FC71C08D0EE99E
+          01DFB12800234543EE3C037EDE03D1FF222488F18B3DD02B27F285FBFB1FD21B
+          7214A56E334B0A220000002574455874646174653A6372656174650032303230
+          2D30362D30325431383A33303A31332B30303A3030B54C069B00000025744558
+          74646174653A6D6F6469667900323032302D30362D30325431383A33303A3133
+          2B30303A3030C411BE270000001974455874536F667477617265007777772E69
+          6E6B73636170652E6F72679BEE3C1A0000000049454E44AE426082}
+      end
+      object SelectIndQS: TShape
+        Left = 226
+        Top = 0
+        Width = 5
+        Height = 70
+        Brush.Color = 4252656
+        Pen.Style = psClear
+        Visible = False
+      end
+      object SelectAreaQS: TShape
+        Left = 0
+        Top = 0
+        Width = 230
+        Height = 70
+        Brush.Style = bsClear
+        Pen.Style = psClear
+        OnMouseLeave = SelectAreaQSMouseLeave
+        OnMouseMove = SelectAreaQSMouseMove
       end
     end
   end
