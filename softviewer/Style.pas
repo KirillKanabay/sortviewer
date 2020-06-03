@@ -3,82 +3,64 @@ unit Style;
 interface
   uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.WinXCtrls, Vcl.Grids,
-  Vcl.ExtCtrls, Vcl.Buttons;
+  Vcl.ExtCtrls, Vcl.Buttons, Vcl.Imaging.pngimage;
 
-  type
-    TWindowBorderStyle = record
-  {#----------------Стили окна----------------#}
-      //Задает ширину рамок
-      borderWidth: integer;
-      //Задает ширину верхней рамки
-      borderTopWidth: integer;
-      //Задает цвет рамок
-      borderColor: TColor;
+  procedure loadFont();
+  procedure DestroyFont();
+  procedure loadPngFromRes(Image:TImage; id: integer);
 
-      //Задает стиль окна
-      procedure setStyle(WindowBorderRight,WindowBorderBottom,WindowBorderLeft: TShape);
-   {#------------------------------------------#}
-  end;
-
-   {#--------Загрузка и удаление шрифта--------#}
-   procedure loadFont(FontName,FontFile: string);
-   procedure DestroyFont(FontFile:string);
-   {#------------------------------------------#}
+var
+  FontArray: array of string = ['GilroyBold','GilroyLight','GilroyRegular','GilroyMedium'];
+  WinTempPath: string;
 
 implementation
 
-  procedure TWindowBorderStyle.SetStyle(WindowBorderRight,
-WindowBorderBottom,WindowBorderLeft: TShape);
-  var WS: TWindowBorderStyle;
+  function GetTempDir: String;
+  var
+    tempFolder: array[0..MAX_PATH] of Char;
   begin
-
-    With WS do begin
-    {#-----Установка значений стилей окна-----#}
-    borderWidth:=5;
-    borderColor:=RGB(11, 118, 179); {hex:0B76B3}
-    {#----------------------------------------#}
-
-    {Устанавливаем выравнивание}
-    WindowBorderLeft.Align := alLeft;
-    WindowBorderRight.Align := alRight;
-    WindowBorderBottom.Align := alBottom;
-
-    {Устанавливаем размер рамок}
-    WindowBorderBottom.Height := borderWidth;
-
-    WindowBorderLeft.Width := borderWidth;
-    WindowBorderRight.Width := borderWidth;
-
-    {Устанавливаем цвет рамок}
-    WindowBorderLeft.Brush.Color:= borderColor;
-    WindowBorderRight.Brush.Color:= borderColor;
-    WindowBorderBottom.Brush.Color:= borderColor;
-
-    {Убираем обводку рамок}
-    WindowBorderRight.Pen.Color:=borderColor;
-    WindowBorderBottom.Pen.Color:=borderColor;
-    WindowBorderLeft.Pen.Color:=borderColor;
-    end;
+    GetTempPath(MAX_PATH, @tempFolder);
+    result := StrPas(tempFolder);
   end;
 
-  procedure loadFont(FontName,FontFile: string);
+  procedure loadFont();
   var
     Res : TResourceStream;
+    fontIdx:integer;
   begin
-    {#-----Загрузка шрифта из ресурсов программы-----#}
-    Res := TResourceStream.Create(hInstance, FontName, Pchar('AF'));
-    Res.SavetoFile(FontFile);
-    Res.Free;
-    AddFontResource(PChar(FontFile));
+    {#-----Загрузка шрифтов из ресурсов программы-----#}
+    if (Win32MajorVersion = 5) then
+      WinTempPath:='C:\WINDOWS\Fonts\'
+    else
+    WinTempPath:=GetTempDir;
+    for fontIdx:= 0 to Length(FontArray)-1 do begin
+      Res := TResourceStream.Create(hInstance, FontArray[fontIdx], Pchar('GF'));
+      Res.SavetoFile(WinTempPath+FontArray[fontIdx]+'.ttf');
+      Res.Free;
+      AddFontResource(PChar(WinTempPath+FontArray[fontIdx]+'.ttf'));
+    end;
     SendMessage(HWND_BROADCAST,WM_FONTCHANGE,0,0);
     {#-----------------------------------------------#}
   end;
 
-  procedure DestroyFont(FontFile:string);
+  procedure DestroyFont();
+  var
+    fontIdx:integer;
   begin
-    RemoveFontResource(PChar(FontFile));
+    for  fontIdx:= 0 to Length(FontArray)-1 do
+      RemoveFontResource(PChar(WinTempPath+FontArray[fontIdx]+'.ttf'));
     SendMessage(HWND_BROADCAST,WM_FONTCHANGE,0,0);
   end;
 
+  procedure loadPngFromRes(Image:TImage; id: integer);
+  var
+    png: TPNGObject;
+  begin
+    png := TPNGObject.Create; // создаем
+    Image.Picture :=nil;
+    png.LoadFromResourceID(HInstance, id); // грузим ресурс
+    Image.Picture.Assign(png);
+    png.Free; // высвобождаем
+  end;
 
 end.
