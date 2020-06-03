@@ -7,7 +7,8 @@ uses
   Style in 'Style.pas';
 
 {$R *.res}
-{$R fontawesome.res}
+{$R res/gilroyfont.res}
+{$R res/helppic.res}
 
 begin
   Application.Initialize;
