@@ -11,20 +11,14 @@ uses
 type
   TMainForm = class(TForm)
     MainMenu: TPanel;
-    MenuTitle: TPanel;
-    MenuCaption: TLabel;
     HelpPanel: TPanel;
-    HelpCaption: TLabel;
     HelpIcon: TImage;
     MainFormLabel: TLabel;
     BubbleSortPanel: TPanel;
     ShakeSortPanel: TPanel;
     InsertionSortPanel: TPanel;
     SelectionSortPanel: TPanel;
-    BubbleSortCaption: TLabel;
-    ShakeSortCaption: TLabel;
     InsertionSortCaption: TLabel;
-    SelectionSortCaption: TLabel;
     BorderBottomBS: TShape;
     BorderBottomIS: TShape;
     BorderBottomSS: TShape;
@@ -37,21 +31,15 @@ type
     SelectIndIS: TShape;
     SelectIndSkS: TShape;
     SelectIndSS: TShape;
-    SelectAreaBS: TShape;
-    SelectAreaIS: TShape;
-    SelectAreaSS: TShape;
-    SelectionAreaSkS: TShape;
     ShellSortPanel: TPanel;
     ShellSortCaption: TLabel;
     BorderBottomShS: TShape;
     ShellSortIcon: TImage;
     SelectIndShS: TShape;
-    SelectAreaShS: TShape;
     QuickSortPanel: TPanel;
     QuickSortCaption: TLabel;
     QuickSortIcon: TImage;
     SelectIndQS: TShape;
-    SelectAreaQS: TShape;
     SortsListPanel: TPanel;
     BSitem: TPanel;
     ScrollBar1: TScrollBar;
@@ -85,34 +73,45 @@ type
     QSIcon: TImage;
     QSDescription: TLabel;
     QSButton: TPanel;
+    HomeIcon: TImage;
+    HomePanel: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure SelectAreaBSMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
-    procedure SelectAreaBSMouseLeave(Sender: TObject);
-    procedure SelectAreaISMouseLeave(Sender: TObject);
-    procedure SelectAreaISMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
-    procedure SelectionAreaSkSMouseLeave(Sender: TObject);
-    procedure SelectionAreaSkSMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
-    procedure SelectAreaSSMouseLeave(Sender: TObject);
-    procedure SelectAreaSSMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
-    procedure SelectAreaShSMouseLeave(Sender: TObject);
-    procedure SelectAreaShSMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
-    procedure SelectAreaQSMouseLeave(Sender: TObject);
-    procedure SelectAreaQSMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
     procedure HelpPanelMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure HelpPanelMouseLeave(Sender: TObject);
     procedure ScrollBar1Change(Sender: TObject);
-    procedure SortsListPanelClick(Sender: TObject);
-    procedure TitleBarPanel1Paint(Sender: TObject; Canvas: TCanvas;
-      var ARect: TRect);
     procedure HelpPanelClick(Sender: TObject);
+    procedure BubbleSortPanelClick(Sender: TObject);
+    procedure BubbleSortPanelMouseLeave(Sender: TObject);
+    procedure BubbleSortPanelMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure ShakeSortPanelMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure ShakeSortPanelMouseLeave(Sender: TObject);
+    procedure InsertionSortPanelMouseLeave(Sender: TObject);
+    procedure InsertionSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
+      X, Y: Integer);
+    procedure QuickSortPanelMouseLeave(Sender: TObject);
+    procedure QuickSortPanelMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure SelectionSortPanelMouseLeave(Sender: TObject);
+    procedure SelectionSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
+      X, Y: Integer);
+    procedure ShellSortPanelMouseLeave(Sender: TObject);
+    procedure ShellSortPanelMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure ShakeSortIconClick(Sender: TObject);
+    procedure InsertionSortIconClick(Sender: TObject);
+    procedure SelectionSortIconClick(Sender: TObject);
+    procedure ShellSortIconClick(Sender: TObject);
+    procedure QuickSortIconClick(Sender: TObject);
+    procedure BSbuttonClick(Sender: TObject);
+    procedure SkSButtonClick(Sender: TObject);
+    procedure ISButtonClick(Sender: TObject);
+    procedure SSButtonClick(Sender: TObject);
+    procedure QSButtonClick(Sender: TObject);
+    procedure ShSButtonClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -127,7 +126,7 @@ implementation
 
 {$R *.dfm}
 
-uses InfoFormUnit;
+uses InfoFormUnit,SortInfoFormUnit;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 var
@@ -149,57 +148,53 @@ begin
   InfoForm.ShowModal();
 end;
 
-procedure TMainForm.TitleBarPanel1Paint(Sender: TObject; Canvas: TCanvas;
-  var ARect: TRect);
-begin
-
-end;
-
-////////////////////////////////////////////////////////////////////////////////
-//>MainMenu
-////////////////////////////////////////////////////////////////////////////////
-{#---------------------------------Leave--------------------------------------#}
 procedure TMainForm.ScrollBar1Change(Sender: TObject);
 begin
     SortsListPanel.Top:=-ScrollBar1.Position;
 end;
 
-procedure TMainForm.SelectAreaBSMouseLeave(Sender: TObject);
+////////////////////////////////////////////////////////////////////////////////
+//>Menu
+////////////////////////////////////////////////////////////////////////////////
+{#---------------------------------Leave--------------------------------------#}
+
+
+procedure TMainForm.BubbleSortPanelMouseLeave(Sender: TObject);
 begin
   BubbleSortPanel.Color:=$00C1820C;
   SelectIndBS.Visible:=false;
   Screen.Cursor:=crArrow;
 end;
 
-procedure TMainForm.SelectAreaISMouseLeave(Sender: TObject);
+procedure TMainForm.InsertionSortPanelMouseLeave(Sender: TObject);
 begin
   InsertionSortPanel.Color:=$00C1820C;
   SelectIndIS.Visible:=false;
   Screen.Cursor:=crArrow;
 end;
 
-procedure TMainForm.SelectAreaQSMouseLeave(Sender: TObject);
+procedure TMainForm.QuickSortPanelMouseLeave(Sender: TObject);
 begin
   QuickSortPanel.Color:=$00C1820C;
   SelectIndQS.Visible:=false;
   Screen.Cursor:=crArrow;
 end;
 
-procedure TMainForm.SelectAreaShSMouseLeave(Sender: TObject);
+procedure TMainForm.ShellSortPanelMouseLeave(Sender: TObject);
 begin
   ShellSortPanel.Color:=$00C1820C;
   SelectIndShS.Visible:=false;
   Screen.Cursor:=crArrow;
 end;
 
-procedure TMainForm.SelectAreaSSMouseLeave(Sender: TObject);
+procedure TMainForm.SelectionSortPanelMouseLeave(Sender: TObject);
 begin
   SelectionSortPanel.Color:=$00C1820C;
   SelectIndSS.Visible:=false;
   Screen.Cursor:=crArrow;
 end;
 
-procedure TMainForm.SelectionAreaSkSMouseLeave(Sender: TObject);
+procedure TMainForm.ShakeSortPanelMouseLeave(Sender: TObject);
 begin
   ShakeSortPanel.Color:=$00C1820C;
   SelectIndSkS.Visible:=false;
@@ -212,13 +207,12 @@ begin
     loadPngFromRes(HelpIcon,1);
     isHoverHI:=false;
    end;
-  HelpCaption.Font.Color:=$00FFFFFF;
   Screen.Cursor:=crArrow;
 end;
 {#----------------------------------------------------------------------------#}
 {#---------------------------------Move---------------------------------------#}
-procedure TMainForm.SelectAreaBSMouseMove(Sender: TObject; Shift: TShiftState;
-  X, Y: Integer);
+procedure TMainForm.BubbleSortPanelMouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
 begin
   BubbleSortPanel.Color:=$00805508;
   SelectIndBS.Visible:=true;
@@ -232,11 +226,10 @@ begin
     loadPngFromRes(HelpIcon,2);
     isHoverHI:=true;
    end;
-   HelpCaption.Font.Color:=$0040E3F0;
    Screen.Cursor:=crHandPoint;
 end;
 
-procedure TMainForm.SelectAreaISMouseMove(Sender: TObject; Shift: TShiftState;
+procedure TMainForm.InsertionSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
   InsertionSortPanel.Color:=$00805508;
@@ -244,7 +237,7 @@ begin
   Screen.Cursor:=crHandPoint;
 end;
 
-procedure TMainForm.SelectAreaQSMouseMove(Sender: TObject; Shift: TShiftState;
+procedure TMainForm.QuickSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
   QuickSortPanel.Color:=$00805508;
@@ -252,7 +245,7 @@ begin
   Screen.Cursor:=crHandPoint;
 end;
 
-procedure TMainForm.SelectAreaShSMouseMove(Sender: TObject; Shift: TShiftState;
+procedure TMainForm.ShellSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
   ShellSortPanel.Color:=$00805508;
@@ -260,26 +253,112 @@ begin
   Screen.Cursor:=crHandPoint;
 end;
 
-procedure TMainForm.SelectAreaSSMouseMove(Sender: TObject; Shift: TShiftState;
+procedure TMainForm.SelectionSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
   SelectionSortPanel.Color:=$00805508;
-  SelectIndSS.Visible:=true;
+  if not (SelectIndSS.Visible) then SelectIndSS.Visible:=true;
   Screen.Cursor:=crHandPoint;
 end;
 
-procedure TMainForm.SelectionAreaSkSMouseMove(Sender: TObject;
+procedure TMainForm.ShakeSortPanelMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Integer);
 begin
   ShakeSortPanel.Color:=$00805508;
   SelectIndSkS.Visible:=true;
   Screen.Cursor:=crHandPoint;
 end;
-procedure TMainForm.SortsListPanelClick(Sender: TObject);
+{#-----------------------------Click------------------------------------------#}
+procedure TMainForm.BubbleSortPanelClick(Sender: TObject);
 begin
-
+  SortID:=0;
+  SortInfoForm.Show();
+  MainForm.Hide();
 end;
 
-{#----------------------------------------------------------------------------#}
+procedure TMainForm.ShakeSortIconClick(Sender: TObject);
+begin
+  SortID:=1;
+  SortInfoForm.Show();
+  MainForm.Hide();
+end;
+
+procedure TMainForm.InsertionSortIconClick(Sender: TObject);
+begin
+  SortID:=2;
+  SortInfoForm.Show();
+  MainForm.Hide();
+end;
+
+procedure TMainForm.SelectionSortIconClick(Sender: TObject);
+begin
+  SortID:=3;
+  SortInfoForm.Show();
+  MainForm.Hide();
+end;
+
+procedure TMainForm.ShellSortIconClick(Sender: TObject);
+begin
+  SortID:=4;
+  SortInfoForm.Show();
+  MainForm.Hide();
+end;
+
+procedure TMainForm.QuickSortIconClick(Sender: TObject);
+begin
+  SortID:=5;
+  SortInfoForm.Show();
+  MainForm.Hide();
+end;
+
+////////////////////////////////////////////////////////////////////////////////
+//>SortPanel
+////////////////////////////////////////////////////////////////////////////////
+{#-----------------------------Click------------------------------------------#}
+ procedure TMainForm.BSbuttonClick(Sender: TObject);
+begin
+  ShowMessage('kek');
+  SortID:=0;
+  SortInfoForm.Show();
+  MainForm.Hide();
+end;
+
+procedure TMainForm.SkSButtonClick(Sender: TObject);
+begin
+  SortID:=1;
+  SortInfoForm.Show();
+  MainForm.Hide();
+end;
+
+procedure TMainForm.ISButtonClick(Sender: TObject);
+begin
+  SortID:=2;
+  SortInfoForm.Show();
+  MainForm.Hide();
+end;
+
+procedure TMainForm.SSButtonClick(Sender: TObject);
+begin
+  SortID:=3;
+  SortInfoForm.Show();
+  MainForm.Hide();
+end;
+
+procedure TMainForm.ShSButtonClick(Sender: TObject);
+begin
+  SortID:=4;
+  SortInfoForm.Show();
+  MainForm.Hide();
+end;
+
+procedure TMainForm.QSButtonClick(Sender: TObject);
+begin
+  SortID:=5;
+  SortInfoForm.Show();
+  MainForm.Hide();
+end;
+
+
+
 end.
 
