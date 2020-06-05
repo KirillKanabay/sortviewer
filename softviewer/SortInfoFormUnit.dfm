@@ -26,10 +26,11 @@ object SortInfoForm: TSortInfoForm
     Height = 50
     Caption = #1053#1072#1079#1074#1072#1085#1080#1077'_'#1089#1086#1088#1090#1080#1088#1086#1074#1082#1080
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = 3881787
     Font.Height = 50
     Font.Name = 'Gilroy Bold'
     Font.Style = []
+    Font.Quality = fqAntialiased
     ParentFont = False
   end
   object Menu: TPanel
@@ -81,6 +82,7 @@ object SortInfoForm: TSortInfoForm
           6174653A6D6F6469667900323032302D30362D30345431303A31383A34342B30
           303A30300B7FCD710000001974455874536F667477617265007777772E696E6B
           73636170652E6F72679BEE3C1A0000000049454E44AE426082}
+        OnClick = HomeIconClick
         OnMouseLeave = MenuTitleMouseLeave
         OnMouseMove = MenuTitleMouseMove
       end
@@ -94,6 +96,7 @@ object SortInfoForm: TSortInfoForm
       Color = 8410376
       ParentBackground = False
       TabOrder = 1
+      OnClick = HelpPanelClick
       OnMouseLeave = HelpPanelMouseLeave
       OnMouseMove = HelpPanelMouseMove
       object HelpIcon: TImage
@@ -130,6 +133,7 @@ object SortInfoForm: TSortInfoForm
           325431353A33303A30382B30303A30304D908A3D0000001974455874536F6674
           77617265007777772E696E6B73636170652E6F72679BEE3C1A0000000049454E
           44AE426082}
+        OnClick = HelpPanelClick
         OnMouseLeave = HelpPanelMouseLeave
         OnMouseMove = HelpPanelMouseMove
       end
@@ -145,6 +149,7 @@ object SortInfoForm: TSortInfoForm
       Color = 12681740
       ParentBackground = False
       TabOrder = 2
+      OnClick = BubbleSortPanelClick
       OnMouseLeave = BubbleSortPanelMouseLeave
       OnMouseMove = BubbleSortPanelMouseMove
       object BorderBottomBS: TShape
@@ -217,6 +222,7 @@ object SortInfoForm: TSortInfoForm
           002574455874646174653A6D6F6469667900323032302D30362D30325431373A
           34393A34392B30303A3030DADF04710000001974455874536F66747761726500
           7777772E696E6B73636170652E6F72679BEE3C1A0000000049454E44AE426082}
+        OnClick = BubbleSortPanelClick
         OnMouseLeave = BubbleSortPanelMouseLeave
         OnMouseMove = BubbleSortPanelMouseMove
       end
@@ -232,6 +238,7 @@ object SortInfoForm: TSortInfoForm
       ParentBackground = False
       ParentCtl3D = False
       TabOrder = 3
+      OnClick = ShakeSortPanelClick
       OnMouseLeave = ShakeSortPanelMouseLeave
       OnMouseMove = ShakeSortPanelMouseMove
       object BorderBottomSkS: TShape
@@ -281,6 +288,7 @@ object SortInfoForm: TSortInfoForm
           3A6D6F6469667900323032302D30362D30325431373A35313A30352B30303A30
           304B6CFFCB0000001974455874536F667477617265007777772E696E6B736361
           70652E6F72679BEE3C1A0000000049454E44AE426082}
+        OnClick = ShakeSortPanelClick
         OnMouseLeave = ShakeSortPanelMouseLeave
         OnMouseMove = ShakeSortPanelMouseMove
       end
@@ -307,6 +315,7 @@ object SortInfoForm: TSortInfoForm
       Color = 12681740
       ParentBackground = False
       TabOrder = 4
+      OnClick = InsertionSortPanelClick
       OnMouseLeave = InsertionSortPanelMouseLeave
       OnMouseMove = InsertionSortPanelMouseMove
       object BorderBottomIS: TShape
@@ -352,6 +361,7 @@ object SortInfoForm: TSortInfoForm
           74455874646174653A6D6F6469667900323032302D30362D30325431383A3331
           3A31372B30303A3030DF9CF10A0000001974455874536F667477617265007777
           772E696E6B73636170652E6F72679BEE3C1A0000000049454E44AE426082}
+        OnClick = InsertionSortPanelClick
         OnMouseLeave = InsertionSortPanelMouseLeave
         OnMouseMove = InsertionSortPanelMouseMove
       end
@@ -380,6 +390,7 @@ object SortInfoForm: TSortInfoForm
       ParentBackground = False
       ShowCaption = False
       TabOrder = 5
+      OnClick = SelectionSortPanelClick
       OnMouseLeave = SelectionSortPanelMouseLeave
       OnMouseMove = SelectionSortPanelMouseMove
       object BorderBottomSS: TShape
@@ -398,7 +409,7 @@ object SortInfoForm: TSortInfoForm
       end
       object SelectionSortIcon: TImage
         Left = 165
-        Top = 0
+        Top = -1
         Width = 64
         Height = 64
         Center = True
@@ -434,6 +445,7 @@ object SortInfoForm: TSortInfoForm
           3032302D30362D30325431373A35333A31352B30303A303083332F6800000019
           74455874536F667477617265007777772E696E6B73636170652E6F72679BEE3C
           1A0000000049454E44AE426082}
+        OnClick = SelectionSortPanelClick
         OnMouseLeave = SelectionSortPanelMouseLeave
         OnMouseMove = SelectionSortPanelMouseMove
       end
@@ -462,6 +474,7 @@ object SortInfoForm: TSortInfoForm
       ParentBackground = False
       ParentCtl3D = False
       TabOrder = 6
+      OnClick = ShellSortPanelClick
       OnMouseLeave = ShellSortPanelMouseLeave
       OnMouseMove = ShellSortPanelMouseMove
       object BorderBottomShS: TShape
@@ -501,6 +514,7 @@ object SortInfoForm: TSortInfoForm
           74646174653A6D6F6469667900323032302D30362D30325431373A35343A3432
           2B30303A3030ECA804FB0000001974455874536F667477617265007777772E69
           6E6B73636170652E6F72679BEE3C1A0000000049454E44AE426082}
+        OnClick = ShellSortPanelClick
         OnMouseLeave = ShellSortPanelMouseLeave
         OnMouseMove = ShellSortPanelMouseMove
       end
@@ -527,6 +541,7 @@ object SortInfoForm: TSortInfoForm
       ParentBackground = False
       ParentCtl3D = False
       TabOrder = 7
+      OnClick = QuickSortPanelClick
       OnMouseLeave = QuickSortPanelMouseLeave
       OnMouseMove = QuickSortPanelMouseMove
       object QuickSortIcon: TImage
@@ -558,6 +573,7 @@ object SortInfoForm: TSortInfoForm
           74646174653A6D6F6469667900323032302D30362D30325431383A33303A3133
           2B30303A3030C411BE270000001974455874536F667477617265007777772E69
           6E6B73636170652E6F72679BEE3C1A0000000049454E44AE426082}
+        OnClick = QuickSortPanelClick
         OnMouseLeave = QuickSortPanelMouseLeave
         OnMouseMove = QuickSortPanelMouseMove
       end
@@ -602,17 +618,30 @@ object SortInfoForm: TSortInfoForm
     ParentBackground = False
     ParentFont = False
     TabOrder = 2
+    OnClick = ShowCodeButtonClick
+    OnMouseLeave = ShowCodeButtonMouseLeave
+    OnMouseMove = ShowCodeButtonMouseMove
     object ButtonLabel1: TLabel
-      Left = 35
+      Left = 32
       Top = 4
-      Width = 129
-      Height = 45
+      Width = 121
+      Height = 44
       Alignment = taCenter
       Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1080#1089#1093#1086#1076#1085#1099#1081' '#1082#1086#1076
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = 22
+      Font.Name = 'Gilroy'
+      Font.Style = []
+      Font.Quality = fqAntialiased
+      ParentFont = False
       WordWrap = True
+      OnClick = ShowCodeButtonClick
+      OnMouseMove = ShowCodeButtonMouseMove
+      OnMouseLeave = ShowCodeButtonMouseLeave
     end
   end
-  object ShowDemoSort: TPanel
+  object ShowDemoButton: TPanel
     Left = 801
     Top = 285
     Width = 190
@@ -627,14 +656,27 @@ object SortInfoForm: TSortInfoForm
     ParentBackground = False
     ParentFont = False
     TabOrder = 3
+    OnClick = ShowDemoButtonClick
+    OnMouseLeave = ShowDemoButtonMouseLeave
+    OnMouseMove = ShowDemoButtonMouseMove
     object ButtonLabel2: TLabel
-      Left = 11
+      Left = 12
       Top = 4
-      Width = 169
-      Height = 45
+      Width = 167
+      Height = 44
       Alignment = taCenter
       Caption = #1044#1077#1084#1086#1085#1089#1090#1088#1072#1094#1080#1103' '#1088#1072#1073#1086#1090#1099' '#1072#1083#1075#1086#1088#1080#1090#1084#1072
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = 22
+      Font.Name = 'Gilroy'
+      Font.Style = []
+      Font.Quality = fqAntialiased
+      ParentFont = False
       WordWrap = True
+      OnClick = ShowDemoButtonClick
+      OnMouseMove = ShowDemoButtonMouseMove
+      OnMouseLeave = ShowDemoButtonMouseLeave
     end
   end
 end
