@@ -60,7 +60,7 @@ implementation
 
 {$R *.dfm}
 uses
-  SortInfoFormUnit, Utils;
+  SortInfoFormUnit, DesignUnit, Utils;
 
 procedure TSortDemoForm.FormShow(Sender: TObject);
 begin
@@ -115,14 +115,12 @@ end;
 procedure TSortDemoForm.GenDataButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
 begin
-   GenDataButton.Color:=$00805508;
-   Screen.Cursor:=crHandPoint;
+  HoverButton(GenDataButton);
 end;
 
 procedure TSortDemoForm.GenDataButtonMouseLeave(Sender: TObject);
 begin
-   GenDataButton.Color:=$00C1820C;
-   Screen.Cursor:=crArrow;
+  UnhoverButton(GenDataButton);
 end;
 
 procedure TSortDemoForm.GenDataButtonClick(Sender: TObject);
@@ -136,14 +134,12 @@ end;
 procedure TSortDemoForm.SortDataButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
 begin
-   SortDataButton.Color:=$00805508;
-   Screen.Cursor:=crHandPoint;
+   HoverButton(SortDataButton);
 end;
 
 procedure TSortDemoForm.SortDataButtonMouseLeave(Sender: TObject);
 begin
-   SortDataButton.Color:=$00C1820C;
-   Screen.Cursor:=crArrow;
+   UnHoverButton(SortDataButton);
 end;
 
 procedure TSortDemoForm.SortDataButtonClick(Sender: TObject);
@@ -167,14 +163,12 @@ end;
 procedure TSortDemoForm.SubmitCountButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
 begin
-   SubmitCountButton.Color:=$00805508;
-   Screen.Cursor:=crHandPoint;
+   HoverButton(SubmitCountButton);
 end;
 
 procedure TSortDemoForm.SubmitCountButtonMouseLeave(Sender: TObject);
 begin
-   SubmitCountButton.Color:=$00C1820C;
-   Screen.Cursor:=crArrow;
+   UnhoverButton(SubmitCountButton);
 end;
 
 procedure TSortDemoForm.SubmitCountButtonClick(Sender: TObject);

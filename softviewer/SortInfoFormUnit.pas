@@ -135,7 +135,8 @@ implementation
 uses MainFormUnit,
      DemoFormUnit,
      CodeFormUnit,
-     ProductInfoFormUnit;
+     ProductInfoFormUnit,
+     DesignUnit;
 
 procedure TSortInfoForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -158,42 +159,52 @@ begin
 end;
 
 procedure TSortInfoForm.selectActivePanel(Sender: TObject);
-var fakeShift:TShiftState; {необходим для вызова процедуры подсветки активной вкладки меню}
 begin
   {Подсвечиваем активную вкладку}
   case SortID of
     0:
-      BubbleSortPanelMouseMove(Sender,fakeShift,0,0);
+      SelectPanel(BubbleSortPanel, SelectIndBS);
     1:
-      ShakeSortPanelMouseMove(Sender,fakeShift,0,0);
+      SelectPanel(ShakeSortPanel, SelectIndSkS);
     2:
-      InsertionSortPanelMouseMove(Sender,fakeShift,0,0);
+      SelectPanel(InsertionSortPanel, SelectIndIS);
     3:
-      SelectionSortPanelMouseMove(Sender,fakeShift,0,0);
+      SelectPanel(SelectionSortPanel, SelectIndSS);
     4:
-      ShellSortPanelMouseMove(Sender,fakeShift,0,0);
+      SelectPanel(ShellSortPanel, SelectIndShS);
     5:
-      QuickSortPanelMouseMove(Sender,fakeShift,0,0);
+      SelectPanel(QuickSortPanel, SelectIndQS);
   end;
 end;
 
 procedure TSortInfoForm.unselectActivePanel(Sender: TObject; nonActivePanel: integer);
-var fakeShift:TShiftState; {необходим для вызова процедуры чтобы убрать подсветку пункта меню}
 begin
   {Убираем подсветку меню}
   case nonActivePanel of
     0:
-      BubbleSortPanelMouseLeave(Sender);
+      begin
+        UnselectPanel(BubbleSortPanel, SelectIndBS);
+      end;
     1:
-      ShakeSortPanelMouseLeave(Sender);
+      begin
+        UnselectPanel(ShakeSortPanel, SelectIndSkS);
+      end;
     2:
-      InsertionSortPanelMouseLeave(Sender);
+      begin
+        UnselectPanel(InsertionSortPanel, SelectIndIS);
+      end;
     3:
-      SelectionSortPanelMouseLeave(Sender);
+      begin
+        UnselectPanel(SelectionSortPanel, SelectIndSS);
+      end;
     4:
-      ShellSortPanelMouseLeave(Sender);
+      begin
+        UnselectPanel(ShellSortPanel, SelectIndShS);
+      end;
     5:
-      QuickSortPanelMouseLeave(Sender);
+      begin
+        UnselectPanel(QuickSortPanel, SelectIndQS);
+      end;
   end;
 end;
 
@@ -216,56 +227,38 @@ end;
 
 procedure TSortInfoForm.BubbleSortPanelMouseLeave(Sender: TObject);
 begin
-  if SortID = 0 then exit; //Не даем выполнить изменение состояния пункта меню, если он выделен
-
-  BubbleSortPanel.Color:=$00C1820C;
-  SelectIndBS.Visible:=false;
-  Screen.Cursor:=crArrow;
+  if SortID = 0 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else UnhoverPanel(BubbleSortPanel,SelectIndBS);
 end;
 
 procedure TSortInfoForm.InsertionSortPanelMouseLeave(Sender: TObject);
 begin
-  if SortID = 2 then exit; //Не даем выполнить изменение состояния пункта меню, если он выделен
-
-  InsertionSortPanel.Color:=$00C1820C;
-  SelectIndIS.Visible:=false;
-  Screen.Cursor:=crArrow;
+  if SortID = 2 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else UnhoverPanel(InsertionSortPanel,SelectIndIS);
 end;
 
 procedure TSortInfoForm.QuickSortPanelMouseLeave(Sender: TObject);
 begin
-  if SortID = 5 then exit; //Не даем выполнить изменение состояния пункта меню, если он выделен
-
-  QuickSortPanel.Color:=$00C1820C;
-  SelectIndQS.Visible:=false;
-  Screen.Cursor:=crArrow;
+  if SortID = 5 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else UnhoverPanel(QuickSortPanel,SelectIndQS);
 end;
 
 procedure TSortInfoForm.ShellSortPanelMouseLeave(Sender: TObject);
 begin
-  if SortID = 4 then exit; //Не даем выполнить изменение состояния пункта меню, если он выделен
-
-  ShellSortPanel.Color:=$00C1820C;
-  SelectIndShS.Visible:=false;
-  Screen.Cursor:=crArrow;
+  if SortID = 4 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else UnhoverPanel(ShellSortPanel,SelectIndShS);
 end;
 
 procedure TSortInfoForm.SelectionSortPanelMouseLeave(Sender: TObject);
 begin
-  if SortID = 3 then exit; //Не даем выполнить изменение состояния пункта меню, если он выделен
-
-  SelectionSortPanel.Color:=$00C1820C;
-  SelectIndSS.Visible:=false;
-  Screen.Cursor:=crArrow;
+  if SortID = 3 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else UnhoverPanel(SelectionSortPanel, SelectIndSS);
 end;
 
 procedure TSortInfoForm.ShakeSortPanelMouseLeave(Sender: TObject);
 begin
-  if SortID = 1 then exit; //Не даем выполнить изменение состояния пункта меню, если он выделен
-
-  ShakeSortPanel.Color:=$00C1820C;
-  SelectIndSkS.Visible:=false;
-  Screen.Cursor:=crArrow
+  if SortID = 1 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else UnhoverPanel(ShakeSortPanel, SelectIndSkS);
 end;
 
 
@@ -292,9 +285,8 @@ end;
 procedure TSortInfoForm.BubbleSortPanelMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Integer);
 begin
-  BubbleSortPanel.Color:=$00805508;
-  SelectIndBS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  if SortID = 0 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else HoverPanel(BubbleSortPanel, SelectIndBS);
 end;
 
 procedure TSortInfoForm.HelpPanelMouseMove(Sender: TObject; Shift: TShiftState;
@@ -310,9 +302,8 @@ end;
 procedure TSortInfoForm.InsertionSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
-  InsertionSortPanel.Color:=$00805508;
-  SelectIndIS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  if SortID = 2 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else HoverPanel(InsertionSortPanel, SelectIndIS);
 end;
 
 procedure TSortInfoForm.MenuTitleMouseMove(Sender: TObject; Shift: TShiftState;
@@ -328,33 +319,29 @@ end;
 procedure TSortInfoForm.QuickSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
-  QuickSortPanel.Color:=$00805508;
-  SelectIndQS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  if SortID = 5 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else HoverPanel(QuickSortPanel, SelectIndQS);
 end;
 
 procedure TSortInfoForm.ShellSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
-  ShellSortPanel.Color:=$00805508;
-  SelectIndShS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  if SortID = 4 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else HoverPanel(ShellSortPanel, SelectIndShS);
 end;
 
 procedure TSortInfoForm.SelectionSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
-  SelectionSortPanel.Color:=$00805508;
-  SelectIndSS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  if SortID = 3 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else HoverPanel(SelectionSortPanel, SelectIndSS);
 end;
 
 procedure TSortInfoForm.ShakeSortPanelMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Integer);
 begin
-  ShakeSortPanel.Color:=$00805508;
-  SelectIndSkS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  if SortID = 1 then exit //Не даем выполнить изменение состояния пункта меню, если он выделен
+  else HoverPanel(ShakeSortPanel, SelectIndSkS);
 end;
 {#---------------------------------Click-------------------------------------#}
 procedure TSortInfoForm.HomeIconClick(Sender: TObject);
@@ -446,27 +433,23 @@ end;
 procedure TSortInfoForm.ShowDemoButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
 begin
-   ShowDemoButton.Color:=$00805508;
-   Screen.Cursor:=crHandPoint;
+   HoverButton(ShowDemoButton);
 end;
 
 procedure TSortInfoForm.ShowDemoButtonMouseLeave(Sender: TObject);
 begin
-   ShowDemoButton.Color:=$00C1820C;
-   Screen.Cursor:=crArrow;
+   UnhoverButton(ShowDemoButton);
 end;
 
 procedure TSortInfoForm.ShowCodeButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
   Y: Integer);
 begin
-   ShowCodeButton.Color:=$00805508;
-   Screen.Cursor:=crHandPoint;
+   HoverButton(ShowCodeButton);
 end;
 
 procedure TSortInfoForm.ShowCodeButtonMouseLeave(Sender: TObject);
 begin
-   ShowCodeButton.Color:=$00C1820C;
-   Screen.Cursor:=crArrow;
+  UnhoverButton(ShowCodeButton);
 end;
 
 procedure TSortInfoForm.ShowCodeButtonClick(Sender: TObject);

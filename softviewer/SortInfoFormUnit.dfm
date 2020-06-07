@@ -158,7 +158,7 @@ object SortInfoForm: TSortInfoForm
         Width = 230
         Height = 5
         Align = alBottom
-        Brush.Color = 8410376
+        Brush.Color = 6702342
         Pen.Color = 11761163
         Pen.Style = psClear
         OnMouseLeave = BubbleSortPanelMouseLeave
@@ -247,7 +247,7 @@ object SortInfoForm: TSortInfoForm
         Width = 230
         Height = 5
         Align = alBottom
-        Brush.Color = 8410376
+        Brush.Color = 6702342
         Pen.Color = 11761163
         Pen.Style = psClear
         OnMouseLeave = ShakeSortPanelMouseLeave
@@ -324,7 +324,7 @@ object SortInfoForm: TSortInfoForm
         Width = 230
         Height = 5
         Align = alBottom
-        Brush.Color = 8410376
+        Brush.Color = 6702342
         Pen.Color = 11761163
         Pen.Style = psClear
         OnMouseLeave = InsertionSortPanelMouseLeave
@@ -399,7 +399,7 @@ object SortInfoForm: TSortInfoForm
         Width = 230
         Height = 5
         Align = alBottom
-        Brush.Color = 8410376
+        Brush.Color = 6702342
         Pen.Color = 11761163
         Pen.Style = psClear
         Pen.Width = 0
@@ -483,7 +483,7 @@ object SortInfoForm: TSortInfoForm
         Width = 230
         Height = 5
         Align = alBottom
-        Brush.Color = 8410376
+        Brush.Color = 6702342
         Pen.Color = 11761163
         Pen.Style = psClear
         OnMouseLeave = ShellSortPanelMouseLeave

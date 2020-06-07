@@ -4,11 +4,17 @@ uses
   Vcl.Forms,
   MainFormUnit in 'MainFormUnit.pas' {MainForm},
   SplashFormUnit in 'SplashFormUnit.pas' {SplashScreen},
-  Style in 'Style.pas';
+  Utils in 'Utils.pas',
+  ProductInfoFormUnit in 'ProductInfoFormUnit.pas' {ProductInfoForm},
+  SortInfoFormUnit in 'SortInfoFormUnit.pas' {SortInfoForm},
+  DemoFormUnit in 'DemoFormUnit.pas' {SortDemoForm},
+  CodeFormUnit in 'CodeFormUnit.pas' {SortCodeForm},
+  DesignUnit in 'DesignUnit.pas';
 
 {$R *.res}
 {$R res/gilroyfont.res}
-{$R res/helppic.res}
+{$R res/helppic.res} // Подключение ресурса иконок "Информационного окна"
+{$R res/homepic.res} // Подключение ресурса иконок "Домашней формы"
 
 begin
   Application.Initialize;
@@ -22,6 +28,10 @@ begin
 
   {Создаем главную форму}
   Application.CreateForm(TMainForm, MainForm);
+  Application.CreateForm(TProductInfoForm, ProductInfoForm);
+  Application.CreateForm(TSortInfoForm, SortInfoForm);
+  Application.CreateForm(TSortDemoForm, SortDemoForm);
+  Application.CreateForm(TSortCodeForm, SortCodeForm);
   {Скрываем заставку}
   SplashForm.Hide;
   SplashForm.Free;
