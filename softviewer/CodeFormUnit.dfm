@@ -3,7 +3,7 @@ object SortCodeForm: TSortCodeForm
   Top = 0
   BorderStyle = bsDialog
   Caption = 'SortCodeForm'
-  ClientHeight = 509
+  ClientHeight = 621
   ClientWidth = 867
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
@@ -18,11 +18,25 @@ object SortCodeForm: TSortCodeForm
   OnShow = FormShow
   PixelsPerInch = 120
   TextHeight = 16
+  object CodeFormLabel: TLabel
+    Left = 179
+    Top = 8
+    Width = 237
+    Height = 40
+    Caption = #1048#1089#1093#1086#1076#1085#1099#1081' '#1082#1086#1076': '
+    Font.Charset = ANSI_CHARSET
+    Font.Color = 3881787
+    Font.Height = 40
+    Font.Name = 'Gilroy Bold'
+    Font.Style = []
+    Font.Quality = fqAntialiased
+    ParentFont = False
+  end
   object LangTabs: TTabControl
     Left = 0
-    Top = 0
+    Top = 56
     Width = 865
-    Height = 513
+    Height = 561
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -37,13 +51,13 @@ object SortCodeForm: TSortCodeForm
     TabIndex = 0
     OnChange = LangTabsChange
     object SortCode: TWebBrowser
-      Left = 0
+      Left = 3
       Top = 24
-      Width = 890
-      Height = 481
+      Width = 865
+      Height = 537
       TabOrder = 0
       ControlData = {
-        4C00000096490000C52700000000000000000000000000000000000000000000
+        4C00000085470000672C00000000000000000000000000000000000000000000
         000000004C000000000000000000000001000000E0D057007335CF11AE690800
         2B2E126208000000000000004C0000000114020000000000C000000000000046
         8000000000000000000000000000000000000000000000000000000000000000

@@ -1,0 +1,4 @@
+#include "helppicdef.pas"
+
+helpImg RCDATA "help.png"
+helpHoverImg RCDATA "help-hover.png"

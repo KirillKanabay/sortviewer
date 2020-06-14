@@ -3,8 +3,7 @@ unit DesignUnit;
 interface
   uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.WinXCtrls, Vcl.Grids,
-  Vcl.ExtCtrls, Vcl.Buttons, Vcl.WinXPickers, Vcl.Imaging.pngimage,
-  Vcl.TitleBarCtrls, Utils;
+  Vcl.ExtCtrls, Vcl.Buttons, Vcl.WinXPickers, Vcl.Imaging.pngimage, Utils;
 
   procedure hoverPanel(Panel:TPanel; SelectInd:TShape);
   procedure UnhoverPanel(Panel:TPanel; SelectInd:TShape);
@@ -60,4 +59,9 @@ implementation
     SelectInd.Visible:=false;
     SelectInd.Brush.Color:=$0040E3F0;
   end;
+
+  /////////////////////////////////////////////////////////////////////////
+  ///>DemoSort
+  /////////////////////////////////////////////////////////////////////////
+
 end.

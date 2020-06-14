@@ -5,8 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.WinXCtrls, Vcl.Grids,
-  Vcl.ExtCtrls,Style, Vcl.Buttons, Vcl.WinXPickers, Vcl.Imaging.pngimage,
-  Vcl.TitleBarCtrls;
+  Vcl.ExtCtrls, Vcl.Buttons, Vcl.WinXPickers, Vcl.Imaging.pngimage,Utils;
 
 type
   TMainForm = class(TForm)
@@ -40,10 +39,7 @@ type
     QuickSortCaption: TLabel;
     QuickSortIcon: TImage;
     SelectIndQS: TShape;
-    SortsListPanel: TPanel;
     BSitem: TPanel;
-    ScrollBar1: TScrollBar;
-    SortsPanel: TPanel;
     BSborder: TImage;
     BSIcon: TImage;
     BSDescription: TLabel;
@@ -75,12 +71,12 @@ type
     QSButton: TPanel;
     HomeIcon: TImage;
     HomePanel: TPanel;
+    SortsBox: TScrollBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure HelpPanelMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure HelpPanelMouseLeave(Sender: TObject);
-    procedure ScrollBar1Change(Sender: TObject);
     procedure HelpPanelClick(Sender: TObject);
     procedure BubbleSortPanelClick(Sender: TObject);
     procedure BubbleSortPanelMouseLeave(Sender: TObject);
@@ -112,6 +108,28 @@ type
     procedure SSButtonClick(Sender: TObject);
     procedure QSButtonClick(Sender: TObject);
     procedure ShSButtonClick(Sender: TObject);
+    procedure BSbuttonMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure SkSButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure ISButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure SSButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure QSButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure ShSButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure ISButtonMouseLeave(Sender: TObject);
+    procedure BSbuttonMouseLeave(Sender: TObject);
+    procedure SSButtonMouseLeave(Sender: TObject);
+    procedure SkSButtonMouseLeave(Sender: TObject);
+    procedure QSButtonMouseLeave(Sender: TObject);
+    procedure ShSButtonMouseLeave(Sender: TObject);
+    procedure SortsBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure SortsBoxMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
   private
     { Private declarations }
   public
@@ -126,7 +144,7 @@ implementation
 
 {$R *.dfm}
 
-uses InfoFormUnit,SortInfoFormUnit;
+uses ProductInfoFormUnit,SortInfoFormUnit, DesignUnit, Sorts;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 var
@@ -134,6 +152,8 @@ var
 begin
   {Подключаем шрифты}
   LoadFont();
+  if Win32MajorVersion <> 10 then kD:=0.1;
+
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
@@ -145,60 +165,50 @@ end;
 
 procedure TMainForm.HelpPanelClick(Sender: TObject);
 begin
-  InfoForm.ShowModal();
+  ProductInfoForm.ShowModal();
 end;
 
-procedure TMainForm.ScrollBar1Change(Sender: TObject);
-begin
-    SortsListPanel.Top:=-ScrollBar1.Position;
-end;
 
 ////////////////////////////////////////////////////////////////////////////////
 //>Menu
 ////////////////////////////////////////////////////////////////////////////////
+{
+  BS - BubbleSort
+  IS - InsertionSort
+  QS - QuickSort
+  ShS - ShellSort
+  SkS - ShakeSort
+  SS - SelectionSort
+}
 {#---------------------------------Leave--------------------------------------#}
-
-
 procedure TMainForm.BubbleSortPanelMouseLeave(Sender: TObject);
 begin
-  BubbleSortPanel.Color:=$00C1820C;
-  SelectIndBS.Visible:=false;
-  Screen.Cursor:=crArrow;
+  UnhoverPanel(BubbleSortPanel, SelectIndBS);
 end;
 
 procedure TMainForm.InsertionSortPanelMouseLeave(Sender: TObject);
 begin
-  InsertionSortPanel.Color:=$00C1820C;
-  SelectIndIS.Visible:=false;
-  Screen.Cursor:=crArrow;
+  UnhoverPanel(InsertionSortPanel, SelectIndIS);
 end;
 
 procedure TMainForm.QuickSortPanelMouseLeave(Sender: TObject);
 begin
-  QuickSortPanel.Color:=$00C1820C;
-  SelectIndQS.Visible:=false;
-  Screen.Cursor:=crArrow;
+  UnhoverPanel(QuickSortPanel, SelectIndQS);
 end;
 
 procedure TMainForm.ShellSortPanelMouseLeave(Sender: TObject);
 begin
-  ShellSortPanel.Color:=$00C1820C;
-  SelectIndShS.Visible:=false;
-  Screen.Cursor:=crArrow;
+  UnhoverPanel(ShellSortPanel, SelectIndShS);
 end;
 
 procedure TMainForm.SelectionSortPanelMouseLeave(Sender: TObject);
 begin
-  SelectionSortPanel.Color:=$00C1820C;
-  SelectIndSS.Visible:=false;
-  Screen.Cursor:=crArrow;
+  UnhoverPanel(SelectionSortPanel, SelectIndSS);
 end;
 
 procedure TMainForm.ShakeSortPanelMouseLeave(Sender: TObject);
 begin
-  ShakeSortPanel.Color:=$00C1820C;
-  SelectIndSkS.Visible:=false;
-  Screen.Cursor:=crArrow
+  UnhoverPanel(ShakeSortPanel, SelectIndSkS);
 end;
 
 procedure TMainForm.HelpPanelMouseLeave(Sender: TObject);
@@ -214,9 +224,7 @@ end;
 procedure TMainForm.BubbleSortPanelMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Integer);
 begin
-  BubbleSortPanel.Color:=$00805508;
-  SelectIndBS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  hoverPanel(BubbleSortPanel, SelectIndBS);
 end;
 
 procedure TMainForm.HelpPanelMouseMove(Sender: TObject; Shift: TShiftState;
@@ -232,42 +240,33 @@ end;
 procedure TMainForm.InsertionSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
-  InsertionSortPanel.Color:=$00805508;
-  SelectIndIS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  hoverPanel(InsertionSortPanel, SelectIndIS);
 end;
 
 procedure TMainForm.QuickSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
-  QuickSortPanel.Color:=$00805508;
-  SelectIndQS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  hoverPanel(QuickSortPanel, SelectIndQS);
 end;
 
 procedure TMainForm.ShellSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
-  ShellSortPanel.Color:=$00805508;
-  SelectIndShS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  hoverPanel(ShellSortPanel, SelectIndShS);
 end;
 
 procedure TMainForm.SelectionSortPanelMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
-  SelectionSortPanel.Color:=$00805508;
-  if not (SelectIndSS.Visible) then SelectIndSS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  hoverPanel(SelectionSortPanel, SelectIndSS);
 end;
 
 procedure TMainForm.ShakeSortPanelMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Integer);
 begin
-  ShakeSortPanel.Color:=$00805508;
-  SelectIndSkS.Visible:=true;
-  Screen.Cursor:=crHandPoint;
+  hoverPanel(ShakeSortPanel, SelectIndSkS);
 end;
+
 {#-----------------------------Click------------------------------------------#}
 procedure TMainForm.BubbleSortPanelClick(Sender: TObject);
 begin
@@ -312,12 +311,80 @@ begin
 end;
 
 ////////////////////////////////////////////////////////////////////////////////
-//>SortPanel
+//>SortBox
 ////////////////////////////////////////////////////////////////////////////////
+{#-----------------------------Leave------------------------------------------#}
+
+procedure TMainForm.ISButtonMouseLeave(Sender: TObject);
+begin
+  UnhoverButton(ISButton);
+end;
+
+procedure TMainForm.BSbuttonMouseLeave(Sender: TObject);
+begin
+  UnhoverButton(BSButton);
+end;
+
+procedure TMainForm.SSButtonMouseLeave(Sender: TObject);
+begin
+   UnhoverButton(SSButton);
+end;
+
+procedure TMainForm.SkSButtonMouseLeave(Sender: TObject);
+begin
+  UnhoverButton(SkSButton);
+end;
+
+procedure TMainForm.QSButtonMouseLeave(Sender: TObject);
+begin
+  UnhoverButton(QSButton);
+end;
+
+procedure TMainForm.ShSButtonMouseLeave(Sender: TObject);
+begin
+   UnhoverButton(ShSButton);
+end;
+{#-----------------------------Move------------------------------------------#}
+
+procedure TMainForm.BSbuttonMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+   HoverButton(BSButton);
+end;
+
+procedure TMainForm.SkSButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+   HoverButton(SkSButton);
+end;
+
+procedure TMainForm.ISButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+   HoverButton(ISButton);
+end;
+
+procedure TMainForm.SSButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+   HoverButton(SSButton);
+end;
+
+procedure TMainForm.QSButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+   HoverButton(QSButton);
+end;
+
+procedure TMainForm.ShSButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+   HoverButton(ShSButton);
+end;
+
 {#-----------------------------Click------------------------------------------#}
  procedure TMainForm.BSbuttonClick(Sender: TObject);
 begin
-  ShowMessage('kek');
   SortID:=0;
   SortInfoForm.Show();
   MainForm.Hide();
@@ -357,8 +424,18 @@ begin
   SortInfoForm.Show();
   MainForm.Hide();
 end;
+{#-----------------------------Scroll------------------------------------------#}
+procedure TMainForm.SortsBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  SortsBox.VertScrollBar.Position := SortsBox.VertScrollBar.Position + 40;
+end;
 
-
+procedure TMainForm.SortsBoxMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  SortsBox.VertScrollBar.Position:= SortsBox.VertScrollBar.Position-40;
+end;
 
 end.
 

@@ -1,7 +1,7 @@
 object SortInfoForm: TSortInfoForm
   Left = 0
   Top = 0
-  BorderStyle = bsSingle
+  BorderStyle = bsDialog
   Caption = '$'#1053#1072#1079#1074#1072#1085#1080#1077'_'#1089#1086#1088#1090#1080#1088#1086#1074#1082#1080
   ClientHeight = 544
   ClientWidth = 1000
@@ -605,7 +605,7 @@ object SortInfoForm: TSortInfoForm
   end
   object ShowCodeButton: TPanel
     Left = 801
-    Top = 191
+    Top = 285
     Width = 190
     Height = 52
     BevelOuter = bvNone
@@ -643,7 +643,7 @@ object SortInfoForm: TSortInfoForm
   end
   object ShowDemoButton: TPanel
     Left = 801
-    Top = 285
+    Top = 191
     Width = 190
     Height = 52
     BevelOuter = bvNone

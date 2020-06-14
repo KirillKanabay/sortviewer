@@ -1,4 +1,4 @@
-object InfoForm: TInfoForm
+object ProductInfoForm: TProductInfoForm
   Left = 0
   Top = 0
   BorderStyle = bsDialog
@@ -19,15 +19,16 @@ object InfoForm: TInfoForm
   TextHeight = 16
   object ProductName: TLabel
     Left = 223
-    Top = 32
+    Top = 30
     Width = 247
-    Height = 57
+    Height = 60
     Caption = 'Sortviewer'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 3881787
     Font.Height = 60
     Font.Name = 'Gilroy Bold'
     Font.Style = []
+    Font.Quality = fqAntialiased
     ParentFont = False
   end
   object ProductLogo: TImage
@@ -122,7 +123,7 @@ object InfoForm: TInfoForm
   object ProductDescription2: TLabel
     Left = 24
     Top = 181
-    Width = 580
+    Width = 572
     Height = 92
     Caption = 
       '      '#1044#1072#1085#1085#1086#1077' '#1087#1088#1080#1083#1086#1078#1077#1085#1080#1077' '#1073#1091#1076#1077#1090' '#1087#1086#1083#1077#1079#1085#1086' '#1091#1095#1072#1097#1080#1084#1089#1103', '#1076#1083#1103' '#1087#1086#1085#1080#1084#1072#1085#1080#1103' '#1080' ' +
@@ -133,14 +134,15 @@ object InfoForm: TInfoForm
     Font.Height = 23
     Font.Name = 'Gilroy'
     Font.Style = []
+    Font.Quality = fqAntialiased
     ParentFont = False
     WordWrap = True
   end
   object ProductDiscription1: TLabel
     Left = 24
     Top = 127
-    Width = 580
-    Height = 72
+    Width = 535
+    Height = 48
     Caption = 
       '      Sortviewer - '#1101#1090#1086' '#1091#1095#1077#1073#1085#1086#1077' '#1087#1088#1080#1083#1086#1078#1077#1085#1080#1077', '#1087#1086#1079#1074#1086#1083#1103#1102#1097#1077#1077' '#1091#1087#1088#1086#1089#1090#1080#1090#1100 +
       ' '#1087#1086#1085#1080#1084#1072#1085#1080#1077' '#1088#1072#1073#1086#1090#1099' '#1072#1083#1075#1086#1088#1080#1090#1084#1086#1074' '#1089#1086#1088#1090#1080#1088#1086#1074#1082#1080'.'
@@ -149,6 +151,7 @@ object InfoForm: TInfoForm
     Font.Height = 24
     Font.Name = 'Gilroy Bold'
     Font.Style = []
+    Font.Quality = fqAntialiased
     ParentFont = False
     WordWrap = True
   end
@@ -163,6 +166,7 @@ object InfoForm: TInfoForm
     Font.Height = 18
     Font.Name = 'Gilroy Light'
     Font.Style = []
+    Font.Quality = fqAntialiased
     ParentFont = False
   end
   object DeveloperNameLabel: TLabel
@@ -176,6 +180,7 @@ object InfoForm: TInfoForm
     Font.Height = 18
     Font.Name = 'Gilroy Light'
     Font.Style = []
+    Font.Quality = fqAntialiased
     ParentFont = False
   end
   object DeveloperEmailLabel: TLabel
@@ -189,6 +194,7 @@ object InfoForm: TInfoForm
     Font.Height = 18
     Font.Name = 'Gilroy Light'
     Font.Style = []
+    Font.Quality = fqAntialiased
     ParentFont = False
   end
   object ProductInfoButton: TPanel
@@ -203,6 +209,7 @@ object InfoForm: TInfoForm
     Font.Height = 22
     Font.Name = 'Gilroy'
     Font.Style = []
+    Font.Quality = fqAntialiased
     ParentBackground = False
     ParentFont = False
     TabOrder = 0

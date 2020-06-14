@@ -14,7 +14,11 @@ object SortDemoForm: TSortDemoForm
   OldCreateOrder = False
   Position = poMainFormCenter
   Scaled = False
+  OnClose = FormClose
   OnShow = FormShow
+  DesignSize = (
+    900
+    580)
   PixelsPerInch = 120
   TextHeight = 15
   object DemoLabel: TLabel
@@ -235,30 +239,34 @@ object SortDemoForm: TSortDemoForm
     Font.Quality = fqAntialiased
     ParentFont = False
     TabOrder = 4
+    OnClick = CheckBox1Click
   end
   object DataGrid: TStringGrid
-    Left = 176
-    Top = 240
+    Left = 168
+    Top = 249
     Width = 553
-    Height = 57
-    Color = clWhite
+    Height = 56
+    Anchors = []
+    BevelInner = bvNone
+    BevelOuter = bvNone
+    BevelWidth = 5
     ColCount = 10
+    Ctl3D = True
     DefaultColWidth = 50
-    DefaultColAlignment = taCenter
     DefaultRowHeight = 50
-    FixedColor = clWhite
     FixedCols = 0
     RowCount = 1
     FixedRows = 0
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = 25
+    Font.Height = 20
     Font.Name = 'Gilroy'
     Font.Style = []
-    GradientEndColor = clBlack
     GridLineWidth = 5
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goFixedRowDefAlign]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goTabs]
+    ParentCtl3D = False
     ParentFont = False
     TabOrder = 5
+    OnDrawCell = DataGridDrawCell
   end
 end

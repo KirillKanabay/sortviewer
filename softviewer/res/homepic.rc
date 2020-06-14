@@ -1,0 +1,4 @@
+#include "homepicdef.pas"
+
+homeImg RCDATA "home.png"
+homeHoverImg RCDATA "home-hover.png"

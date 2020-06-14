@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A8075D29-9D29-449F-9121-29F313E11DEE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="softviewer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Мусорка\Новая папка\Новая папка\Colorful_Grid\StringGridCells.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="softviewer">
+        <MSBuild Projects="softviewer.dproj"/>
+    </Target>
+    <Target Name="softviewer:Clean">
+        <MSBuild Projects="softviewer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="softviewer:Make">
+        <MSBuild Projects="softviewer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="StringGridCells">
+        <MSBuild Projects="..\Мусорка\Новая папка\Новая папка\Colorful_Grid\StringGridCells.dproj"/>
+    </Target>
+    <Target Name="StringGridCells:Clean">
+        <MSBuild Projects="..\Мусорка\Новая папка\Новая папка\Colorful_Grid\StringGridCells.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="StringGridCells:Make">
+        <MSBuild Projects="..\Мусорка\Новая папка\Новая папка\Colorful_Grid\StringGridCells.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="softviewer;StringGridCells"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="softviewer:Clean;StringGridCells:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="softviewer:Make;StringGridCells:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

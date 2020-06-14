@@ -9,7 +9,8 @@ uses
   SortInfoFormUnit in 'SortInfoFormUnit.pas' {SortInfoForm},
   DemoFormUnit in 'DemoFormUnit.pas' {SortDemoForm},
   CodeFormUnit in 'CodeFormUnit.pas' {SortCodeForm},
-  DesignUnit in 'DesignUnit.pas';
+  DesignUnit in 'DesignUnit.pas',
+  Sorts in 'Sorts.pas';
 
 {$R *.res}
 {$R res/gilroyfont.res}

@@ -1,14 +1,14 @@
-unit InfoFormUnit;
+unit ProductInfoFormUnit;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  Vcl.StdCtrls, Style;
+  Vcl.StdCtrls, Utils;
 
 type
-  TInfoForm = class(TForm)
+  TProductInfoForm = class(TForm)
     ProductName: TLabel;
     ProductLogo: TImage;
     ProductDescription2: TLabel;
@@ -25,13 +25,13 @@ type
   end;
 
 var
-  InfoForm: TInfoForm;
+  ProductInfoForm: TProductInfoForm;
 
 implementation
 
 {$R *.dfm}
 
-procedure TInfoForm.FormCreate(Sender: TObject);
+procedure TProductInfoForm.FormCreate(Sender: TObject);
 begin
   ProductVersionLabel.Caption:=ProductVersionLabel.Caption+' '+ProductVersion;
   DeveloperNameLabel.Caption:=DeveloperNameLabel.Caption+' '+DeveloperName;

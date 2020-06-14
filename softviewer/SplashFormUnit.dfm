@@ -1515,7 +1515,7 @@ object SplashForm: TSplashForm
     ExplicitHeight = 400
   end
   object Timer1: TTimer
-    Interval = 500
+    Interval = 2500
     OnTimer = Timer1Timer
     Left = 664
     Top = 8

@@ -8,6 +8,7 @@ interface
   procedure loadFont();
   procedure DestroyFont();
   procedure loadPngFromRes(Image:TImage; id: integer);
+  procedure Delay(Value: Cardinal);
 
 const
   ProductVersion = 'Alpha 0.01';
@@ -72,4 +73,21 @@ implementation
     png.Free; // высвобождаем
   end;
 
+  procedure Delay(Value: Cardinal);
+  var
+    F, N: Cardinal;
+  begin
+    N := 0;
+    while N <= (Value div 10) do
+    begin
+      SleepEx(1, True);
+      Application.ProcessMessages;
+      Inc(N);
+    end;
+    F := GetTickCount;
+    repeat
+      Application.ProcessMessages;
+      N := GetTickCount;
+    until (N - F >= (Value mod 10)) or (N < F);
+  end;
 end.
