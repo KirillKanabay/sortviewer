@@ -213,5 +213,7 @@ object ProductInfoForm: TProductInfoForm
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    OnMouseLeave = ProductInfoButtonMouseLeave
+    OnMouseMove = ProductInfoButtonMouseMove
   end
 end
