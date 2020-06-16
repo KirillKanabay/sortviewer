@@ -4,7 +4,7 @@ object SortInfoForm: TSortInfoForm
   BorderStyle = bsDialog
   Caption = '$'#1053#1072#1079#1074#1072#1085#1080#1077'_'#1089#1086#1088#1090#1080#1088#1086#1074#1082#1080
   ClientHeight = 544
-  ClientWidth = 1000
+  ClientWidth = 999
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -605,9 +605,9 @@ object SortInfoForm: TSortInfoForm
   end
   object ShowCodeButton: TPanel
     Left = 801
-    Top = 285
+    Top = 280
     Width = 190
-    Height = 52
+    Height = 45
     BevelOuter = bvNone
     Color = 12681740
     Font.Charset = ANSI_CHARSET
@@ -622,10 +622,11 @@ object SortInfoForm: TSortInfoForm
     OnMouseLeave = ShowCodeButtonMouseLeave
     OnMouseMove = ShowCodeButtonMouseMove
     object ButtonLabel1: TLabel
-      Left = 32
-      Top = 4
-      Width = 121
-      Height = 44
+      Left = 0
+      Top = 0
+      Width = 190
+      Height = 45
+      Align = alClient
       Alignment = taCenter
       Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1080#1089#1093#1086#1076#1085#1099#1081' '#1082#1086#1076
       Font.Charset = ANSI_CHARSET
@@ -643,9 +644,9 @@ object SortInfoForm: TSortInfoForm
   end
   object ShowDemoButton: TPanel
     Left = 801
-    Top = 191
+    Top = 215
     Width = 190
-    Height = 52
+    Height = 45
     BevelOuter = bvNone
     Color = 12681740
     Font.Charset = ANSI_CHARSET
@@ -660,10 +661,11 @@ object SortInfoForm: TSortInfoForm
     OnMouseLeave = ShowDemoButtonMouseLeave
     OnMouseMove = ShowDemoButtonMouseMove
     object ButtonLabel2: TLabel
-      Left = 12
-      Top = 4
-      Width = 167
-      Height = 44
+      Left = 0
+      Top = 0
+      Width = 190
+      Height = 45
+      Align = alClient
       Alignment = taCenter
       Caption = #1044#1077#1084#1086#1085#1089#1090#1088#1072#1094#1080#1103' '#1088#1072#1073#1086#1090#1099' '#1072#1083#1075#1086#1088#1080#1090#1084#1072
       Font.Charset = ANSI_CHARSET
