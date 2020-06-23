@@ -104,7 +104,7 @@ object SortDemoForm: TSortDemoForm
     Pen.Color = 3881787
     Pen.Width = 2
   end
-  object CheckDataLabel: TLabel
+  object Label1: TLabel
     Left = 204
     Top = 340
     Width = 462
@@ -187,7 +187,7 @@ object SortDemoForm: TSortDemoForm
     OnMouseMove = GenDataButtonMouseMove
   end
   object SortDataButton: TPanel
-    Left = 481
+    Left = 483
     Top = 496
     Width = 260
     Height = 30
@@ -211,6 +211,8 @@ object SortDemoForm: TSortDemoForm
     Top = 140
     Width = 87
     Height = 28
+    BevelInner = bvNone
+    BevelOuter = bvNone
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -268,5 +270,25 @@ object SortDemoForm: TSortDemoForm
     ParentFont = False
     TabOrder = 5
     OnDrawCell = DataGridDrawCell
+  end
+  object IterationButton: TPanel
+    Left = 483
+    Top = 532
+    Width = 260
+    Height = 30
+    Caption = #1048#1090#1077#1088#1072#1094#1080#1080' '#1089#1086#1088#1090#1080#1088#1086#1074#1082#1080
+    Color = 12681740
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = 22
+    Font.Name = 'Gilroy'
+    Font.Style = []
+    Font.Quality = fqAntialiased
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 6
+    OnClick = IterationButtonClick
+    OnMouseLeave = IterationButtonMouseLeave
+    OnMouseMove = IterationButtonMouseMove
   end
 end

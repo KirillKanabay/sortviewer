@@ -11,7 +11,7 @@ interface
   procedure Delay(Value: Cardinal);
 
 const
-  ProductVersion = 'Alpha 0.01';
+  ProductVersion = 'Alpha 0.12';
   DeveloperName = 'Kirill Kanabay';
   DeveloperEmail = 'kirillkanabay@gmail.com';
 

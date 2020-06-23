@@ -2,7 +2,7 @@ unit Sorts;
 
 interface
   uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Math, Utils;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Math, Utils,IterationsSortFormUnit;
 
   procedure Swap(Arr:TStringGrid; idx1,idx2:integer);
   function compare(Arr:TStringGrid;idx1,idx2:integer):boolean;
@@ -18,7 +18,7 @@ interface
 
   var
     StopDemo, ShowDemo: boolean;
-    kD: real = 1.0; {Решение бага с задержкой анимации на разных версиях винды,
+    kD: real = 0.7; {Решение бага с задержкой анимации на разных версиях винды,
     путем умножения времени задержки на коэфицент. Если win10 kD = 1, если 7 и ниже то 0,1}
 
   implementation
@@ -30,7 +30,7 @@ begin
   setCellColor(Arr,idx1,3,0);
   setCellColor(Arr,idx2,3,Round(2000*kD));
 
-  {swap}
+  {Обмен}
   TempElement := Arr.Cells[idx1,0];
   Arr.Cells[idx1,0] := Arr.Cells[idx2,0];
   Arr.Cells[idx2,0] := TempElement;
@@ -88,6 +88,8 @@ begin
       end;
     end;
     setCellColor(Arr,Arr.ColCount - 1- i, 4, 0);
+    CellsState[Arr.ColCount - 1- i]:=4;
+    pushIteration(Arr);
   end;
 end;
 
@@ -101,15 +103,17 @@ begin
       if StopDemo then exit;
       key := Arr.Cells[i,0];
       j := i;
-      compare(Arr,j-1,j);
-      while (j > 0) and (StrToInt(Arr.Cells[j-1,0])>StrToInt(key))  do
+      //compare(Arr,j-1,j);
+      while (j > 0) and (StrToInt(Arr.Cells[j-1,0])>StrToInt(key)) do
         begin
+          compare(Arr,j-1,j);
           if StopDemo then exit;
           {обмен элементов}
           swap(Arr,j,j-1);
           j := j - 1;
         end;
       Arr.Cells[j,0] := key;
+      pushIteration(Arr);
     end;
     for i := 0 to Arr.ColCount - 1 do
       setCellColor(Arr,i, 4, 0);
@@ -126,18 +130,23 @@ begin
 
   {опорный элемент массива}
   Pivot :=Arr.Cells[(Left + Right) div 2,0];
+ //Подсвечиваем сепаратор
 
-  setCellColor(Arr,(Left + Right) div 2,4,Round(4000*kD)); //Подсвечиваем сепаратор
-  if StopDemo then exit;
   repeat
+    if StopDemo then exit;
+
+    setCellColor(Arr,(Left + Right) div 2,4,Round(4000*kD));
     {Слева до сепаратора}
+    setCellColor(Arr,NewLeft,2,Round(2000*kD));
+    setCellColor(Arr,NewRight,2,Round(2000*kD));
+
     while (StrToInt(Arr.Cells[NewLeft,0])<StrToInt(Pivot)) do begin
       setCellColor(Arr,NewLeft,1,0); //Убираем подсветку у предыдущего элемента
 
       if StopDemo then exit;
       NewLeft := NewLeft + 1;
 
-      setCellColor(Arr,NewLeft,2,Round(2000*kD));
+      setCellColor(Arr, NewLeft, 2,Round(2000*kD));
     end;
 
     {Справа до сепаратора}
@@ -146,8 +155,7 @@ begin
       if StopDemo then exit;
 
       NewRight := NewRight - 1;
-
-      setCellColor(Arr,NewRight,2,Round(2000*kD));
+        setCellColor(Arr, NewRight, 2,Round(2000*kD));
     end;
     if NewLeft <= NewRight then
     begin
@@ -156,12 +164,14 @@ begin
       NewLeft := NewLeft + 1;
       NewRight := NewRight - 1;
     end;
+     //Подсвечиваем сепаратор
   until NewLeft > NewRight;
-
 
   for var i := 0 to Arr.ColCount-1 do
     setCellColor(Arr,i,1,0); //Убираем подсведку с элементов
-
+  CellsState[(Left + Right) div 2]:=4;
+  pushIteration(Arr);
+  CellsState[(Left + Right) div 2]:=0;
   {рекурсивный вызов сортировки для "меньших" элементов}
   if Left < NewRight then
     QuickSort(Arr,Left, NewRight);
@@ -189,6 +199,8 @@ begin
     {Обмен минимального и первого элемента рабочей области массива}
     swap(Arr, i, min);
     setCellColor(Arr,i, 4,0);
+    CellsState[i]:=4;
+    pushIteration(Arr);
   end;
 end;
 
@@ -213,6 +225,7 @@ begin
       end;
     end;
      setCellColor(Arr,LastIndex, 4,0);
+     CellsState[LastIndex]:=4;
     {проход справа налево}
     for i:= LastIndex-1 downto FirstIndex+1 do begin
       compare(Arr,i,i-1);
@@ -224,7 +237,8 @@ begin
       end;
     end;
     setCellColor(Arr,FirstIndex, 4, 0);
-
+    CellsState[FirstIndex]:=4;
+    pushIteration(Arr);
     {уменьшаем рабочую зону}
     FirstIndex := firstIndex + 1;
     LastIndex := lastIndex - 1;
@@ -241,12 +255,15 @@ begin
     for i:=0 to Arr.ColCount-1 - d  do begin
       j:=i;
       if StopDemo then exit;
-      while (j>=0) and (StrToInt(Arr.Cells[j,0])>StrToInt(Arr.Cells[j+d,0])) and compare(Arr,j,j+d) do begin
+      compare(Arr,j,j+d);
+      while (j>=0) and (StrToInt(Arr.Cells[j,0])>StrToInt(Arr.Cells[j+d,0])) do begin
+        compare(Arr,j,j+d);
         {обмен элементов}
         if StopDemo then exit;
         swap(Arr,j,j+d);
         j:=j - 1;
       end;
+      pushIteration(Arr);
     end;
     d:=d div 2;
   end;

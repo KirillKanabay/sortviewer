@@ -4,7 +4,7 @@ object SortCodeForm: TSortCodeForm
   BorderStyle = bsDialog
   Caption = 'SortCodeForm'
   ClientHeight = 621
-  ClientWidth = 867
+  ClientWidth = 925
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -35,7 +35,7 @@ object SortCodeForm: TSortCodeForm
   object LangTabs: TTabControl
     Left = 0
     Top = 56
-    Width = 865
+    Width = 925
     Height = 561
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -53,11 +53,11 @@ object SortCodeForm: TSortCodeForm
     object SortCode: TWebBrowser
       Left = 3
       Top = 24
-      Width = 865
+      Width = 925
       Height = 537
       TabOrder = 0
       ControlData = {
-        4C00000085470000672C00000000000000000000000000000000000000000000
+        4C0000007B4C0000672C00000000000000000000000000000000000000000000
         000000004C000000000000000000000001000000E0D057007335CF11AE690800
         2B2E126208000000000000004C0000000114020000000000C000000000000046
         8000000000000000000000000000000000000000000000000000000000000000

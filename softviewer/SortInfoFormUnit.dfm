@@ -4,7 +4,7 @@ object SortInfoForm: TSortInfoForm
   BorderStyle = bsDialog
   Caption = '$'#1053#1072#1079#1074#1072#1085#1080#1077'_'#1089#1086#1088#1090#1080#1088#1086#1074#1082#1080
   ClientHeight = 544
-  ClientWidth = 999
+  ClientWidth = 1029
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object SortInfoForm: TSortInfoForm
   PixelsPerInch = 120
   TextHeight = 16
   object SortName: TLabel
-    Left = 304
+    Left = 320
     Top = 8
     Width = 442
     Height = 50
@@ -591,20 +591,20 @@ object SortInfoForm: TSortInfoForm
     end
   end
   object SortDescription: TWebBrowser
-    Left = 96
-    Top = 72
-    Width = 681
-    Height = 449
+    Left = 80
+    Top = 64
+    Width = 737
+    Height = 472
     TabOrder = 1
     ControlData = {
-      4C0000004F380000202500000000000000000000000000000000000000000000
+      4C000000F03C0000072700000000000000000000000000000000000000000000
       000000004C000000000000000000000001000000E0D057007335CF11AE690800
       2B2E126209000000000000004C0000000114020000000000C000000000000046
       8000000000000000000000000000000000000000000000000000000000000000
       00000000000000000100000000000000000000000000000000000000}
   end
   object ShowCodeButton: TPanel
-    Left = 801
+    Left = 830
     Top = 280
     Width = 190
     Height = 45
@@ -640,10 +640,12 @@ object SortInfoForm: TSortInfoForm
       OnClick = ShowCodeButtonClick
       OnMouseMove = ShowCodeButtonMouseMove
       OnMouseLeave = ShowCodeButtonMouseLeave
+      ExplicitWidth = 177
+      ExplicitHeight = 44
     end
   end
   object ShowDemoButton: TPanel
-    Left = 801
+    Left = 830
     Top = 215
     Width = 190
     Height = 45
@@ -679,6 +681,8 @@ object SortInfoForm: TSortInfoForm
       OnClick = ShowDemoButtonClick
       OnMouseMove = ShowDemoButtonMouseMove
       OnMouseLeave = ShowDemoButtonMouseLeave
+      ExplicitWidth = 167
+      ExplicitHeight = 44
     end
   end
 end

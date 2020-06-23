@@ -20,10 +20,11 @@ type
     CheckDataInd: TShape;
     SwapDataInd: TShape;
     SortedDataInd: TShape;
-    CheckDataLabel: TLabel;
+    Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     DataGrid: TStringGrid;
+    IterationButton: TPanel;
     procedure SetDemoLabel();
     procedure FormShow(Sender: TObject);
     procedure GenDataButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -43,11 +44,14 @@ type
       Shift: TShiftState);
     procedure DataGridDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
-    procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CheckBox1Click(Sender: TObject);
     procedure unableElements();
     procedure enableElements();
+    procedure IterationButtonClick(Sender: TObject);
+    procedure IterationButtonMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure IterationButtonMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -61,7 +65,8 @@ implementation
 
 {$R *.dfm}
 uses
-  SortInfoFormUnit, DesignUnit, Utils, Sorts;
+  SortInfoFormUnit, DesignUnit, Utils, Sorts, IterationsSortFormUnit;
+
 
 procedure TSortDemoForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -77,9 +82,17 @@ end;
 procedure TSortDemoForm.FormShow(Sender: TObject);
 begin
    Randomize;
+   {”станавливаем таблицу с данными по середине}
+   DataGrid.Width:=DataGrid.ColCount*55;
+   DataGrid.Left:=(SortDemoForm.Width-DataGrid.Width) div 2;
+
    SetDemoLabel();
    EnableElements();
+
    StopDemo:=true;
+
+   IterationButton.Visible:=false;
+   SetLength(CellsState, DataGrid.ColCount);
 end;
 
 procedure TSortDemoForm.SetDemoLabel();
@@ -87,18 +100,21 @@ begin
   SortName.Caption:=SortsName[SortID];
   {÷ентровка надписи}
   SortName.Left:=(SortDemoForm.Width-SortName.Width) div 2;
-  if SortID = 3 then
-     CheckDataLabel.Caption:='-минимальный элемент на текущей итерации';
+  case SortID of
+     3: Label1.Caption:='-минимальный элемент на текущей итерации';
+     5: Label3.Caption:='-сепаратор';
+     else begin
+       Label1.Caption:='-элементы рассматриваемые в текущий момент времени';
+       Label2.Caption:='-элементы,которые мен€ютс€ местами в текущий момент времени' ;
+       Label3.Caption:='-отсортированные элементы';
+     end;
+
+  end;
+
 end;
 
 procedure TSortDemoForm.DataGridDrawCell(Sender: TObject; ACol, ARow: Integer;
   Rect: TRect; State: TGridDrawState);
-type
-  TSave = record
-    FontColor : TColor;
-    FontStyle : TFontStyles;
-    BrColor : TColor;
-  end;
 var
   Flag : Integer;
 begin
@@ -159,6 +175,22 @@ begin
   HoverButton(GenDataButton);
 end;
 
+procedure TSortDemoForm.IterationButtonClick(Sender: TObject);
+begin
+  IterationsSortForm.ShowModal;
+end;
+
+procedure TSortDemoForm.IterationButtonMouseLeave(Sender: TObject);
+begin
+  UnhoverButton(IterationButton);
+end;
+
+procedure TSortDemoForm.IterationButtonMouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  hoverButton(IterationButton);
+end;
+
 procedure TSortDemoForm.GenDataButtonMouseLeave(Sender: TObject);
 begin
   UnhoverButton(GenDataButton);
@@ -167,10 +199,14 @@ end;
 procedure TSortDemoForm.GenDataButtonClick(Sender: TObject);
 var i:integer;
 begin
+  IterationButton.Visible:=false;
+
   for i := 0 to DataGrid.ColCount-1 do begin
     DataGrid.Cells[i,0]:=IntToStr(RandomRange(0, 99));
     {”станавливаем всем клеткам стандартный цвет}
     DataGrid.Rows[0].Objects[i] := TObject(1);
+    {—брасываем состо€ни€ €чеек}
+    CellsState[i]:=0;
   end;
 
 end;
@@ -186,8 +222,22 @@ begin
    UnHoverButton(SortDataButton);
 end;
 
+function isGridEmpty(DataGrid:TStringGrid):boolean;
+begin
+  for var i := 0 to DataGrid.ColCount-1 do
+    if DataGrid.Cells[i,0] = '' then begin
+      isGridEmpty:=true;
+      exit;
+    end;
+  isGridEmpty:=false;
+end;
+
 procedure TSortDemoForm.SortDataButtonClick(Sender: TObject);
 begin
+  if isGridEmpty(DataGrid) then begin
+     ShowMessage('ячейки данных не заполнены');
+     Exit;
+  end;
   if StopDemo and ShowDemo then StopDemo:=false
   else if not ShowDemo then StopDemo:=false
   else begin
@@ -196,6 +246,10 @@ begin
   end;
   UnableElements(); // ќтключаем все элементы формы, мешающие работе алгоритма
   SortDataButton.Caption:='ќстановить демонстрацию';
+
+  clearIterationsGrid();
+  pushIteration(DataGrid);
+
   case sortID of
     0:
       BubbleSort(DataGrid);
@@ -212,6 +266,7 @@ begin
   end;
   StopDemo:=true;
   EnableElements();
+  IterationButton.Visible:=true;
   SortDataButton.Caption:='ќтсортировать данные';
 end;
 
@@ -231,22 +286,16 @@ end;
 procedure TSortDemoForm.SubmitCountButtonClick(Sender: TObject);
 var i:integer;
 begin
-  if CountDataEdit.Color=clWhite then
+  if CountDataEdit.Color=clWhite then begin
     DataGrid.ColCount:= StrToInt(CountDataEdit.Text);
-
   {центруем элемент по середине формы}
   DataGrid.Width:=DataGrid.ColCount*55;
   DataGrid.Left:=(SortDemoForm.Width-DataGrid.Width) div 2;
 
+  SetLength(CellsState, DataGrid.ColCount-1);
+  end;
 end;
 {#------------------------------CountDataEdit----------------------------------#}
-
-procedure TSortDemoForm.Button1Click(Sender: TObject);
-begin
-  DataGrid.Rows[0].Objects[1]:=TObject(1);
-
- // ShowMessage('YES');
-end;
 
 procedure TSortDemoForm.CountDataEditChange(Sender: TObject);
 var

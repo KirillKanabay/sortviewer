@@ -71,7 +71,6 @@ type
     QSButton: TPanel;
     HomeIcon: TImage;
     HomePanel: TPanel;
-    SortsBox: TScrollBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure HelpPanelMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -126,10 +125,6 @@ type
     procedure SkSButtonMouseLeave(Sender: TObject);
     procedure QSButtonMouseLeave(Sender: TObject);
     procedure ShSButtonMouseLeave(Sender: TObject);
-    procedure SortsBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
-      MousePos: TPoint; var Handled: Boolean);
-    procedure SortsBoxMouseWheelUp(Sender: TObject; Shift: TShiftState;
-      MousePos: TPoint; var Handled: Boolean);
   private
     { Private declarations }
   public
@@ -424,18 +419,7 @@ begin
   SortInfoForm.Show();
   MainForm.Hide();
 end;
-{#-----------------------------Scroll------------------------------------------#}
-procedure TMainForm.SortsBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
-  MousePos: TPoint; var Handled: Boolean);
-begin
-  SortsBox.VertScrollBar.Position := SortsBox.VertScrollBar.Position + 40;
-end;
 
-procedure TMainForm.SortsBoxMouseWheelUp(Sender: TObject; Shift: TShiftState;
-  MousePos: TPoint; var Handled: Boolean);
-begin
-  SortsBox.VertScrollBar.Position:= SortsBox.VertScrollBar.Position-40;
-end;
 
 end.
 

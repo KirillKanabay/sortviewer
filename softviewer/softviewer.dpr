@@ -10,7 +10,10 @@ uses
   DemoFormUnit in 'DemoFormUnit.pas' {SortDemoForm},
   CodeFormUnit in 'CodeFormUnit.pas' {SortCodeForm},
   DesignUnit in 'DesignUnit.pas',
-  Sorts in 'Sorts.pas';
+  Sorts in 'Sorts.pas',
+  Vcl.Themes,
+  Vcl.Styles,
+  IterationsSortFormUnit in 'IterationsSortFormUnit.pas' {IterationsSortForm};
 
 {$R *.res}
 {$R res/gilroyfont.res}
@@ -33,6 +36,7 @@ begin
   Application.CreateForm(TSortInfoForm, SortInfoForm);
   Application.CreateForm(TSortDemoForm, SortDemoForm);
   Application.CreateForm(TSortCodeForm, SortCodeForm);
+  Application.CreateForm(TIterationsSortForm, IterationsSortForm);
   {Скрываем заставку}
   SplashForm.Hide;
   SplashForm.Free;

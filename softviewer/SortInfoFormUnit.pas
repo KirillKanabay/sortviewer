@@ -102,7 +102,6 @@ var
   SortID: integer;
   {
     Sorts ID:
-    -1 - MainMenu
     0 - BubbleSort
     1 - ShakeSort
     2 - InsertionSort
